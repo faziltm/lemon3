@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html data-ng-app="LemonApp">
+<link rel="stylesheet" type="text/css" href="css/default-skin.css" />
+    <link rel="stylesheet" type="text/css" href="css/photoswipe.css" />
+<meta charset="UTF-8">
+<style>
+.label {
+  width:100px;
+  text-align:right;
+  float:left;
+  padding-right:10px;
+  font-weight:bold;
+}
+#register-form label.error {
+  color:#FB3A3A;
+  font-weight:bold;
+}
+h1 {
+  font-family: Helvetica;
+  font-weight: 100;
+  color:#333;
+  padding-bottom:20px;
+}
+.formbox{
+border:1px solid green;
+border-radius:3px;
+text-align:left;
+color:green;
+}
+
+
+
+	
+.img-thumb{
+width:280px;
+height:260px;
+padding: 5px;
+border: solid 1px #FFFFFF;
+}
+
+.top-h{
+margin-top:15%;
+}
+
+
+@media only screen and (min-width: 320px) and (max-width: 479px){ 
+.img-thumb{
+width:140px;
+height:120px;
+margin-bottom:3%;
+}
+.top-h{
+margin-top:15%;
+}
+
+}
+@media only screen and (min-width: 480px) and (max-width: 767px){
+
+.img-thumb{
+width:240px;
+height:220px;
+margin-bottom:3%;
+}
+.top-h{
+margin-top:10%;
+}
+
+}
+@media only screen and (min-width: 768px) and (max-width: 991px){
+
+.img-thumb{
+width:280px;
+height:260px;
+margin-bottom:3%;
+}
+
+.top-h{
+margin-top:8%;
+}
+	
+}		
+</style>
+
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12 navclas">
+				<nav class="navbar navbarclass">
+				<div style="float:left;"><a href="#Home"><img src="images/left-yellow.png" style="width:50px;margin:5px;position:absolute;"/></a></div>
+				<div align="center" class="navbartext"><a href="#" translate="GALLERY">GALLERY</a></div>
+				</nav>
+				<span id="showLeftPush" style="top:0;right:0;position:fixed;"><img src="images/Menu.png" alt=""></span>
+		   </div>
+  </div>
+   <!--//Navbar top-->
+   <button id="clicko" ng-click="clickoo();" style="display:none;"></button>         <!----hidden button-->
+   
+ <body class="cbp-spmenu-push">
+    <div class="overlay" ng-click="overclk();"></div>  
+         <!----------------------menu side------------------------------>
+			<nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
+
+				
+				<a style="border-bottom:1px solid;text-align:center;background-color:#27AF54;"><div style="padding-top:20px"><font size="5" color="white" translate="WELCOME">WELCOME</font></div>
+				<div class="user1hide"><br><font size="4" color="white" translate="GUEST">GUEST</font></div>
+				<div class="userhide"><br><font size="4" color="white">{{username}} <br>{{number}}</font></div></a>
+				
+				<div><a style="border-bottom:1px solid;" href="#Home" ng-click="closmenu();"><font class="menu-list" translate="HOME">Home</font><span class="glyphicon glyphicon-home menu-let-color"></span></a></div>
+				<!-- <div class="loghide"><a style="border-bottom:1px solid;" href="#myModal" ng-click="loginbtnactiv();"><font class="menu-list" translate="LOGIN">Login</font><span class="glyphicon glyphicon-log-in menu-let-color"></span></a></div> -->
+				<div class="dashhide"><a style="border-bottom:1px solid;" href="#Dashboard" ng-click="closmenu();"><font class="menu-list" translate="DASHBOARD">Dashboard</font><span class="glyphicon glyphicon-th-list menu-let-color"></span></a></div>
+			    <div class="profhide"><a style="border-bottom:1px solid;" href="#Profile" ng-click="closmenu();"><font class="menu-list" translate="PROFILE">Profile</font><span class="glyphicon glyphicon-user menu-let-color"></span></a></div> 
+				
+				<!-- <div><a style="border-bottom:1px solid;" href="#Gallery" ng-click="closmenu();"><font class="menu-list" translate="GALLERY">Gallery</font><span class="glyphicon glyphicon-th-large menu-let-color"></span></a></div> -->
+				<div><a style="border-bottom:1px solid;" href="#Technology" ng-click="closmenu();"><font class="menu-list" translate="TECHNOLOGY">Technology</font><span class="glyphicon glyphicon-phone menu-let-color"></span></a></div>
+				<div><a style="border-bottom:1px solid;" href="#PublicRelations" ng-click="closmenu();"><font class="menu-list" translate="PUBLICRELATION">Public Relations</font><span class="glyphicon glyphicon-hand-left menu-let-color"></span></a></div>
+			    <div><a style="border-bottom:1px solid;" href="#Hospitality" ng-click="closmenu();"><font class="menu-list" translate="HOSPITALITY">Hospitality</font><span class="glyphicon glyphicon-cutlery menu-let-color"></span></a></div>
+				
+				<div class="outhide"><a style="border-bottom:1px solid;" ng-click="logout();"><font class="menu-list" translate="LOGOUT">Logout</font><span class="glyphicon glyphicon-log-out menu-let-color"></span></a></div>
+		  
+		  </nav>
+	     
+		<!------------------------//menu side------------------------>
+		
+	
+  <!--start-Profile-->
+     <div class="about-section" id="about" style="background-color:#ededed">
+	    <div class="container">
+		<div class="white-bg" style="margin-bottom:20px;">
+		     
+				   
+<!-- =================Gallery============== -->
+  
+   
+	  <div class="row"> 
+		  <div class="col-sm-6" style="padding-top:20px;">
+			<img src="images/galry/Hospitality/8.jpg" style="max-width:100%;" 
+				onclick="openPhotoSwipe('images/galry/Hospitality/',16,'Hospitality');"> 
+			<h4 translate="HOSPITALITY" style="padding-top:5px;">Hospitality</h4>
+		  </div> 
+		  
+		  <div class="col-sm-6" style="padding-top:20px;">
+			<img src="images/galry/PR/1.jpg" style="max-width:100%;"  
+				onclick="openPhotoSwipe('images/galry/PR/',7,'PR');"> 
+			<h4 translate="PUBLICRELATION" style="padding-top:5px;">Public Relations</h4>
+		  </div>
+		  
+	  </div>
+	  <div class="row">
+		<div class="col-sm-6" style="padding-top:20px;">
+			<img src="images/galry/Technology/7.jpg" style="max-width:100%;" 
+				onclick="openPhotoSwipe('images/galry/Technology/',10,'Technology');"> 
+			<h4 translate="TECHNOLOGY" style="padding-top:5px;">Technology</h4>
+		  </div>
+	  </div>
+
+  </div>
+  
+  
+  
+  
+  
+
+<!-- =================/////Gallery============== -->
+
+
+<!-- =================Gallery Parts============== -->
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true" style="z-index:1000000">
+
+		<!-- Background of PhotoSwipe. 
+			 It's a separate element, as animating opacity is faster than rgba(). -->
+		<div class="pswp__bg"></div>
+
+		<!-- Slides wrapper with overflow:hidden. -->
+		<div class="pswp__scroll-wrap">
+
+			<!-- Container that holds slides. PhotoSwipe keeps only 3 slides in DOM to save memory. -->
+			<div class="pswp__container">
+				<!-- don't modify these 3 pswp__item elements, data is added later on -->
+				<div class="pswp__item"></div>
+				<div class="pswp__item"></div>
+				<div class="pswp__item"></div>
+			</div>
+
+			<!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+			<div class="pswp__ui pswp__ui--hidden">
+
+				<div class="pswp__top-bar">
+
+					<!--  Controls are self-explanatory. Order can be changed. -->
+
+					<div class="pswp__counter"></div>
+
+					<button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+					<button class="pswp__button pswp__button--share" title="Share"></button>
+
+					<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+					<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+					<!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+					<!-- element will get class pswp__preloader--active when preloader is running -->
+					<div class="pswp__preloader">
+						<div class="pswp__preloader__icn">
+						  <div class="pswp__preloader__cut">
+							<div class="pswp__preloader__donut"></div>
+						  </div>
+						</div>
+					</div>
+				</div>
+
+				<div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+					<div class="pswp__share-tooltip"></div> 
+				</div>
+
+				<button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+				</button>
+
+				<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+				</button>
+
+				<div class="pswp__caption">
+					<div class="pswp__caption__center"></div>
+				</div>
+
+			  </div>
+
+			</div> 
+
+	</div>
+
+<!-- =================/////Gallery Parts============== -->
+				 
+		         
+			
+				<div class="clearfix"> </div>		
+		        
+		</div>
+	 </div>
+	 </div>
+  <!--//Profile-->
+  
+
+	<!----------------------------footer Nav---------------------------------------->
+			<div class="navfoot" align="center">
+		              <img src="images/Lemon_Tech_logo.png" style="width:120px;"/>
+		            </div>
+	<!--------------------------//footer Nav---------------------------------------->
+							
+		<!--start-smoth-scrolling-->
+	<a href="#about" id="toTop" class="scroll" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
+		<!--//smoth-scrolling-->
+							
+</body>
+<script type="text/javascript" src="js/photoswipe.js"></script>
+        <script type="text/javascript" src="js/photoswipe-ui-default.js"></script>
+					
+		
+		
+		
+		<script type="text/javascript" charset="utf-8">
+		
+			var openPhotoSwipe = function(x,y,z) {
+			var pswpElement = document.querySelectorAll('.pswp')[0];
+			
+			var m="\xa0(Slide left or right to view other Images) \xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0 (Slide up to exit)";
+			var items =[];
+			var i,k;
+			for(i=0;i<y;i++)
+			{
+			k=x+(i+1)+".jpg";
+			items.push({src:k,w:1500,h:1000,title:m});
+			}  
+			
+			var options = {
+					 // history & focus options are disabled on CodePen        
+				history: false,
+				focus: false,
+
+				showAnimationDuration: 0,
+				hideAnimationDuration: 0
+				
+			};
+			
+			var gallery = new PhotoSwipe( pswpElement, PhotoSwipeUI_Default, items, options);
+			gallery.init();
+		};
+		</script>
+		
+		<script>
+						// You can also use "$(window).load(function() {"
+						$(function () {
+						  // Slideshow 4
+						  $("#slider4").responsiveSlides({
+						auto: true,
+						pager: true,
+						nav:false,
+						speed: 500,
+						namespace: "callbacks",
+						before: function () {
+						  $('.events').append("<li>before event fired.</li>");
+						},
+						after: function () {
+						  $('.events').append("<li>after event fired.</li>");
+						}
+						  });
+
+						});
+						  </script>
+			<!-- 	</div>
+
+
+		 </div> -->
+		<script>
+			var menuLeft = document.getElementById( 'cbp-spmenu-s1' ),
+				showLeftPush = document.getElementById( 'showLeftPush' ),
+				showRightPush = document.getElementById( 'showRightPush' ),
+				body = document.body;
+
+			showLeftPush.onclick = function() {
+				classie.toggle( this, 'active' );
+				classie.toggle( body, 'cbp-spmenu-push-toright' );
+				classie.toggle( menuLeft, 'cbp-spmenu-open' );
+				disableOther( 'showLeftPush' );
+			};
+
+			function disableOther( button ) {
+				if( button !== 'showLeftPush' ) {
+					classie.toggle( showLeftPush, 'disabled' );
+				}
+				if( button !== 'showRightPush' ) {
+					classie.toggle( showRightPush, 'disabled' );
+				}
+			}
+		</script>
+		
+		<script type="text/javascript">
+			$(document).ready(function() {
+				
+				var defaults = {
+					containerID: 'toTop', // fading element id
+					containerHoverID: 'toTopHover', // fading element hover id
+					scrollSpeed: 1200,
+					easingType: 'linear' 
+				};
+				
+				
+				$().UItoTop({ easingType: 'easeOutQuart' });
+				
+			});
+		</script>
+		
+</html>

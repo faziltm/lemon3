@@ -1,0 +1,225 @@
+﻿<!DOCTYPE html>
+<html data-ng-app="LemonApp">
+<meta charset="UTF-8">
+<style>
+.label {
+  width:100px;
+  text-align:right;
+  float:left;
+  padding-right:10px;
+  font-weight:bold;
+}
+#register-form label.error {
+  color:#FB3A3A;
+  font-weight:bold;
+}
+h1 {
+  font-family: Helvetica;
+  font-weight: 100;
+  color:#333;
+  padding-bottom:20px;
+}
+.formbox{
+border:1px solid green;
+border-radius:3px;
+color:green;
+}
+</style>
+
+<div class="row dynamictext">
+  <div class="col-md-12 col-sm-12 col-xs-12 navclas">
+				<nav class="navbar navbarclass">
+				<div style="float:left;"><a href="#Home"><img src="images/left-yellow.png" style="width:50px;margin:5px;position:absolute;"/></a></div>
+				<div align="center" class="navbartext"><a href="#" translate="PROFILE">Profile</a></div>
+				</nav>
+				<span id="showLeftPush" style="top:0;right:0;position:fixed;"><img src="images/Menu.png" alt=""></span>
+		   </div>
+  </div>
+   <!--//Navbar top-->
+   <button id="clicko" ng-click="clickoo();" style="display:none;"></button>         <!----hidden button-->
+   
+ <body class="cbp-spmenu-push" >
+    <div class="overlay" ng-click="overclk();"></div>  
+         <!----------------------menu side------------------------------>
+			<nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
+
+				
+				<a style="border-bottom:1px solid;text-align:center;background-color:#27AF54;"><div style="padding-top:20px"><font size="5" color="white" translate="WELCOME">WELCOME</font></div>
+				<div class="user1hide"><br><font size="4" color="white" translate="GUEST">GUEST</font></div>
+				<div class="userhide"><br><font size="4" color="white">{{username}} <br>{{number}}</font></div></a>
+				
+				<div><a style="border-bottom:1px solid;" href="#Home" ng-click="closmenu();"><font class="menu-list" translate="HOME">Home</font><span class="glyphicon glyphicon-home menu-let-color"></span></a></div>
+				<!-- <div class="loghide"><a style="border-bottom:1px solid;" href="#myModal" ng-click="loginbtnactiv();"><font class="menu-list" translate="LOGIN">Login</font><span class="glyphicon glyphicon-log-in menu-let-color"></span></a></div> -->
+				<div class="dashhide"><a style="border-bottom:1px solid;" href="#Dashboard" ng-click="closmenu();"><font class="menu-list" translate="DASHBOARD">Dashboard</font><span class="glyphicon glyphicon-th-list menu-let-color"></span></a></div>
+				<!-- <div class="profhide"><a style="border-bottom:1px solid;" href="#Profile" ng-click="closmenu();"><font class="menu-list" translate="PROFILE">Profile</font><span class="glyphicon glyphicon-user menu-let-color"></span></a></div> -->
+				
+				<div><a style="border-bottom:1px solid;" href="#Gallery" ng-click="closmenu();"><font class="menu-list" translate="GALLERY">Gallery</font><span class="glyphicon glyphicon-th-large menu-let-color"></span></a></div>
+				<div><a style="border-bottom:1px solid;" href="#Technology" ng-click="closmenu();"><font class="menu-list" translate="TECHNOLOGY">Technology</font><span class="glyphicon glyphicon-phone menu-let-color"></span></a></div>
+				<div><a style="border-bottom:1px solid;" href="#PublicRelations" ng-click="closmenu();"><font class="menu-list" translate="PUBLICRELATION">Public Relations</font><span class="glyphicon glyphicon-hand-left menu-let-color"></span></a></div>
+			    <div><a style="border-bottom:1px solid;" href="#Hospitality" ng-click="closmenu();"><font class="menu-list" translate="HOSPITALITY">Hospitality</font><span class="glyphicon glyphicon-cutlery menu-let-color"></span></a></div>
+				
+				<div class="outhide"><a style="border-bottom:1px solid;" ng-click="logout();"><font class="menu-list" translate="LOGOUT">Logout</font><span class="glyphicon glyphicon-log-out menu-let-color"></span></a></div>
+		  
+		  </nav>
+	     
+		<!------------------------//menu side------------------------>
+		
+	
+  <!--start-Profile-->
+     <div class="about-section" id="about" style="background-color:#ededed;width:100%;margin:0px;padding-bottom:110px;">
+	    <div class="dynamictext" style="background-color:white;margin:20px;padding:20px;">
+		      
+		        <div>
+				 <h3 class="tittle" style="text-align:center;" translate="PROFILE">PROFILE</h3>
+				 </div>
+				 <!--<div class="about-pic" style="margin-top:0px;">
+		            <img src="images/lemon-28.jpg" style="width:100%;" alt=""/>
+		    </div> -->
+			     <div align="center" class="about-top top1" style="margin-top:0px;">
+				  <!-- <div align="center" class="col-md-12 col-xs-12 about-text" > -->
+				   <div class="table-responsive profile-tab" align="center">
+				   <table class="table table-striped">
+				   <tbody>
+				   <tr><td style="text-align:left;"><b translate="NAME">Name</b></td><td style="width:10%;">:</td><td style="text-align:left;">{{fname}}</td></tr>
+				   <!-- <tr><td style="text-align:left;"><b>Last Name</b></td><td style="width:10%;">:</td><td style="text-align:left;">{{lname}}</td></tr> -->
+				   <tr><td style="text-align:left;"><b translate="MOBILE">Number</b></td><td style="width:10%;">:</td><td style="text-align:left;">{{mobile}}</td></tr>
+				   <tr><td style="text-align:left;"><b translate="EMAIL">Email</b></td><td style="width:10%;">:</td><td style="text-align:left;">{{email}}</td></tr>
+				   <tr><td style="text-align:left;"><b translate="PASSWORD">Password</b></td><td style="width:10%;">:</td><td style="text-align:left;">{{pass}}</td></tr>
+				   <tr><td colspan="3"><button type="button" class="btn btn-success btn-md editbut" ng-click="editpro();" translate="P-EDIT">Edit</button></td></tr>
+				   </tbody>
+				   <!-- <div align="center"></div> -->
+				   </table>
+				   </div>
+				   
+				   
+				 
+				 <!-- hidden edit fields -->
+				 <form id="register-form" novalidate="novalidate" style="display:none;"> <!--  -->
+					<div style="width:100%;" class="dynamicalign">
+					
+					
+					 <label style="color:green;" translate="MOBILE">Mobile number:</label> 
+					 <input type="number" ng-model="mobile" id="mobile" class="form-control formbox" 
+						name="Mobno" ng-keyup="mobilecheck(mobile);" placeholder="8 Digits" style="width:100%;" disabled>
+						
+					 <br>
+					 <label style="color:green;text-align:left;" translate="NAME">Name: </label>
+					 <input type="text" ng-model="fname" id="fname" class="form-control formbox" 
+						placeholder="Type your first name" style="width:100%;" name="Fname">
+						
+					 <!-- <label style="color:green;text-align:left;">Last Name: </label><input type="text" ng-model="lname" id="lname" class="form-control formbox" placeholder="Type your Last name" style="width:100%;" name="Lname"> -->		   
+					 
+					 <br>
+					 <label style="color:green;text-align:left;" translate="EMAIL">Email: </label>
+					 <input type="email" ng-model="email" id="email" class="form-control formbox" 
+						placeholder="example@xyz.com" style="width:100%;" name="Email">
+						
+					 <br>
+					 <label style="color:green;" translate="PASSWORD">Password: </label>
+					 <input type="password" ng-model="password" class="form-control formbox" 
+						placeholder="*********" style="width:100%;" name="Password">
+				     
+					 <br>
+					 <input type="submit" name="submit" value="{{'SUBMIT' | translate}}" class="btn btn-success"/>
+					 </div>
+				 </form>
+				 <!-- //hidden edit fields -->
+				 
+				<!--  </div> -->
+				 
+		         
+			
+				<div class="clearfix"> </div>		
+		        </div>
+		</div>
+	 </div>
+  <!--//Profile-->
+  
+
+	<!----------------------------footer Nav---------------------------------------->
+			<div class="navfoot" align="center">
+		              <img src="images/Lemon_Tech_logo.png" style="width:120px;"/>
+		            </div>
+	<!--------------------------//footer Nav---------------------------------------->
+							
+		<!--start-smoth-scrolling-->
+	<a href="#about" id="toTop" class="scroll" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
+		<!--//smoth-scrolling-->
+							
+</body>
+
+						 <script>
+						// You can also use "$(window).load(function() {"
+						$(function () {
+						  // Slideshow 4
+						  $("#slider4").responsiveSlides({
+						auto: true,
+						pager: true,
+						nav:false,
+						speed: 500,
+						namespace: "callbacks",
+						before: function () {
+						  $('.events').append("<li>before event fired.</li>");
+						},
+						after: function () {
+						  $('.events').append("<li>after event fired.</li>");
+						}
+						  });
+
+						});
+						  </script>
+			<!-- 	</div>
+
+
+		 </div> -->
+		<script>
+			var menuLeft = document.getElementById( 'cbp-spmenu-s1' ),
+				showLeftPush = document.getElementById( 'showLeftPush' ),
+				showRightPush = document.getElementById( 'showRightPush' ),
+				body = document.body;
+
+			showLeftPush.onclick = function() {
+				classie.toggle( this, 'active' );
+				classie.toggle( body, 'cbp-spmenu-push-toright' );
+				classie.toggle( menuLeft, 'cbp-spmenu-open' );
+				disableOther( 'showLeftPush' );
+			};
+
+			function disableOther( button ) {
+				if( button !== 'showLeftPush' ) {
+					classie.toggle( showLeftPush, 'disabled' );
+				}
+				if( button !== 'showRightPush' ) {
+					classie.toggle( showRightPush, 'disabled' );
+				}
+			}
+		</script>
+		
+		<script type="text/javascript">
+			$(document).ready(function() {
+				
+				var defaults = {
+					containerID: 'toTop', // fading element id
+					containerHoverID: 'toTopHover', // fading element hover id
+					scrollSpeed: 1200,
+					easingType: 'linear' 
+				};
+				
+				
+				$().UItoTop({ easingType: 'easeOutQuart' });
+				
+				var language = localStorage.getItem("language");
+				
+			    if (language == "ar") {
+			        $('.dynamictext').css({ "direction": "rtl"});
+					 $('.dynamicalign').css({ "text-align":"right"});
+			    }
+			    else {
+			        $('.dynamictext').css({ "direction": "ltr"});
+					$('.dynamicalign').css({ "text-align":"left"});
+			    }
+				
+			});
+		</script>
+		
+</html>

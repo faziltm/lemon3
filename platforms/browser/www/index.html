@@ -1,0 +1,3102 @@
+﻿<!DOCTYPE html>
+<html data-ng-app="LemonApp" style="background-color: #ededed;">
+<meta charset="UTF-8">
+
+<link href="css/bootstrap.css" rel="stylesheet" type="text/css">
+<!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" type="text/css"> -->
+<link href="css/carousel.css" rel="stylesheet" type="text/css">
+<link href="css/style.css" type="text/css" rel="stylesheet" media="all">
+<link href="css/component.css" rel="stylesheet" type="text/css" />
+<!-- <link rel="stylesheet" type="text/css" href="css/jquery.bootgrid.css" /> -->
+<link rel="stylesheet" type="text/css" href="css/dataTables.bootstrap.css" />
+<link type="text/css" rel="stylesheet" href="css/jquery.raty.css" />
+
+
+
+<!-- <script type="text/javascript" src="js/carousel.min.js"></script> -->
+<script type="text/javascript" src="js/jquery-2.1.4.js"></script>
+<script type="text/javascript" src="js/JQMswipe.js"></script>
+<!-- <script type="text/javascript" src="//code.jquery.com/jquery-1.11.3.min.js"></script> -->
+<script type="text/javascript" src="js/bootstrap.js"></script>
+<script type="text/javascript" src="js/angular.js"></script>
+<script type="text/javascript" src="js/angular-ui-router.js"></script>
+<script type="text/javascript" src="js/angular-translate.js"></script>
+<script type="text/javascript" src="cordova.js"></script>
+
+
+<!-- <script type="text/javascript" src="js/require.js"></script> -->
+<script type="text/javascript" src="js/move-top.js"></script>
+<script type="text/javascript" src="js/easing.js"></script>
+<script src="js/classie.js"></script>
+<script src="js/responsiveslides.min.js"></script>
+<!-- <script type="text/javascript" src="js/jquery.bootgrid.js"></script>
+<script type="text/javascript" src="js/jquery.bootgrid.fa.js"></script> -->
+<script type="text/javascript" src="js/jquery.dataTables.js"></script>
+<script type="text/javascript" src="js/dataTables.bootstrap.js"></script>
+<script type="text/javascript" src="js/jquery.validate.js"></script>
+<script type="text/javascript" src="js/jquery.raty.js"></script>
+<script type="text/javascript" src="en.json"></script>
+<script type="text/javascript" src="ar.json"></script>
+<!-- <script type="text/javascript" src="js/smsplugin.js"></script>  -->
+<!-- <script src="js/jquery.raty.js"></script> -->
+<!--  <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.js"></script> -->
+
+<body>
+
+    <div data-ui-view style="background-color: #ededed;"></div>
+
+    <!--------------------Spinner------------------------->
+
+    <div class='poptag' style="display:none;">
+        <div class="overlay1"></div>
+        <div class='loader'></div>
+
+    </div>
+
+    <!--------------------////Spinner------------------------->
+    <!--------------------Bootstrap alert------------------------->
+
+    <div align="center">
+        <div class="alert-1 alert-success" role="alert" align="center">
+            <span class="alert-1-1">
+                <strong></strong>
+            </span>
+        </div>
+
+        <div class="alert-2 alert-danger" role="alert" align="center">
+            <span class="alert-2-1">
+                <strong></strong>
+            </span>
+        </div>
+    </div>
+
+    <!--------------------////Bootstrap alert------------------------->
+</body>
+
+
+<script>
+
+    //var smsplugin = cordova.require("info.asankan.phonegap.smsplugin.smsplugin");
+
+    document.addEventListener("deviceready", onDeviceReady, false);
+
+    function onDeviceReady() {
+        //alert("ready");
+        navigator.splashscreen.hide();
+    }
+
+    document.addEventListener("backbutton", onBackKeyDown, true);
+
+    function onBackKeyDown()
+    {
+        var locate=document.location.href.match(/[^\/]+$/)[0];
+        if(locate=="Home")
+        {
+            resp = confirm("Do you want to exit the app?");
+            if (resp === true)
+            {
+                navigator.app.exitApp();
+            }
+        }
+        else
+        {
+            menuopenchk();
+            location.href="#Home";
+        }
+    }
+
+    function menuopenchk()
+    {
+        var link = $("#showLeftPush");
+        var position = link.position();
+        var right =$(window).width() - position.left - link.width();
+        if(right>100)
+        {
+            $("#showLeftPush").click();
+        }
+        else if(right<100)
+        {
+        }
+    }
+
+
+    /*************** Logout function ************/
+
+    function logoutfunc()
+    {
+
+        $(".loghide,.homenav2div3").show();
+        $(".user1hide").show();
+        $(".outhide").hide();
+        $(".userhide").hide();
+        $(".dashhide").hide();
+        $(".profhide").hide();
+        localStorage.removeItem('LoggedIn');
+        localStorage.removeItem('Role');
+        localStorage.removeItem('Name');
+        localStorage.removeItem('Mobile');
+        location.href="#Home";
+        location.reload();
+        menuopenchk();
+    }
+
+    /*************** /// Logout function ************/
+
+    /*************** spinner show/hide ************/
+    function spinshow()
+    {
+        $(".poptag").show();
+    }
+
+    function spinhide()
+    {
+        $(".poptag").hide();
+    }
+
+    /*************** // spinner show/hide ************************/
+
+
+    /************ Custom AlertBox *****************/
+    function specialalert(select,msg,time)
+    {
+        var selector="."+select;
+        var selectmsg=selector+"-1";
+        $(selector).show();
+        $(selectmsg).html(msg);
+        window.setTimeout(function() {
+            $(selector).fadeTo(500, 0).slideUp(500, function(){
+                $(this).remove();
+            });
+        }, time);
+
+    }
+
+    /************ //// Custom AlertBox *****************/
+
+    /************  Network Check *****************/
+    function networkcheck(k)
+    {
+        alert("hello");
+        if(k==0)
+        {
+            alert("Device Offline");
+        }
+        else if(k==1)
+        {
+            $.ajax({
+                url: 'http://retro.naplesplus.us',
+                success: function(data) {
+                    alert('you are in online mode');
+                },
+                error: function(data) {
+                    alert('you are in offline mode');
+                }
+            });
+
+        }
+    }
+    /************ ////  Network Check *****************/
+	
+	function GetLocalString(id, lan){
+		if(_language == "en"){
+			return en[id];
+		}
+		else{
+			return ar[id];
+		}
+	}
+
+
+    /*****************************************  Router Part Begins ********************************************/
+
+    var LemonApp = angular.module("LemonApp",['ui.router','pascalprecht.translate']);
+    var root="http://192.99.57.6:5757/Login.svc";
+    //"http://192.168.0.85/LemonPRAppWCF/Login.svc";//"http://192.99.57.6:3031/Login.svc"; //"http://192.168.0.85/LemonWCF/Login.svc";
+
+
+
+    /*LemonApp.controller('networkcheck', function($scope, $http, $state, $rootScope, $window) {
+
+    });*/
+
+
+    var _language = "en";
+
+
+    LemonApp.config(function($stateProvider, $urlRouterProvider,$translateProvider){
+
+        if(localStorage.getItem("language") != null){
+            if(localStorage.getItem("language").length > 1){
+                _language = localStorage.getItem("language");
+            }
+        }
+
+
+
+        // Adding a translation table for the English language
+        // Adding a json file for the same - en.json
+        $translateProvider.translations('en',en);
+
+
+
+
+        // Adding a translation table for the Russian language
+        // Adding a json file for the same - ru.json
+        $translateProvider.translations('ar',ar)
+
+
+        $translateProvider.preferredLanguage(_language);        //setting prefered language
+
+
+        $urlRouterProvider
+                         .otherwise('/Home');
+
+        $stateProvider
+                      .state('Home',{
+                          url: '/Home',
+                          templateUrl: 'Home.html',
+                          controller: 'HomeController'
+                      })
+
+                       .state('Login',{
+                           url: '/Login',
+                           templateUrl: 'Login.html',
+                           controller: 'LoginController'
+                       })
+
+                      .state('Hospitality',{
+                          url: '/Hospitality',
+                          templateUrl: 'Hospitality.html',
+                          controller: 'HospitalityController'
+                      })
+
+                     .state('Technology',{
+                         url: '/Technology',
+                         templateUrl: 'Technology.html',
+                         controller: 'TechnologyController'
+                     })
+
+                      .state('PublicRelations',{
+                          url: '/PublicRelations',
+                          templateUrl: 'PublicRelations.html',
+                          controller: 'PublicRelationsController'
+                      })
+
+                     .state('Dashboard',{
+                         url: '/Dashboard',
+                         templateUrl: 'Dashboard.html',
+                         controller: 'DashboardController'
+                     })
+
+                      .state('Book',{
+                          url: '/Book',
+                          templateUrl: 'Book.html',
+                          controller: 'BookController'
+                      })
+
+                      .state('ContactUs',{
+                          url: '/ContactUs',
+                          templateUrl: 'ContactUs.html',
+                          controller: 'ContactUsController'
+                      })
+
+                       .state('BODashboard',{
+                           url: '/BODashboard',
+                           templateUrl: 'BODashboard.html',
+                           controller: 'BODashboardController'
+                       })
+                       .state('Gallery',{
+                           url: '/Gallery',
+                           templateUrl: 'Gallery.html',
+                           controller: 'GalleryController'
+                       })
+                       .state('Profile',{
+                           url: '/Profile',
+                           templateUrl: 'Profile.html',
+                           controller: 'ProfileController'
+                       });
+
+    });
+
+
+
+    LemonApp.controller('GalleryController', function($scope, $http, $state, $rootScope, $window, $location) {
+
+        var logincheck=localStorage.getItem("LoggedIn");
+        //alert(logincheck);
+        if(logincheck=="" || logincheck==null)
+        {
+            //location.href="#book";
+            //alert("loggedout");
+            $(".loghide").show();
+            $(".user1hide").show();
+            $(".userhide").hide();
+            $(".outhide").hide();
+            $(".dashhide").hide();
+            $(".profhide").hide();
+        }
+        else if(logincheck==1)
+        {
+            $(".userhide").show();
+            $(".outhide").show();
+            $(".dashhide").show();
+            $(".profhide").show();
+            $(".loghide").hide();
+            $(".user1hide").hide();
+            $scope.username=localStorage.getItem("Name").toUpperCase();
+            $scope.number=localStorage.getItem("Mobile");
+        }
+
+    });
+
+    LemonApp.controller('HomeController', function($scope, $http, $state, $rootScope, $window, $location,$translate) {
+
+        if(_language == "en"){
+            $scope.isEnglish = "1";
+            $scope.isArabic = "0";
+            $("#loginimg").attr('src', "images/en/login.png");
+            $("#technologimg").attr('src', "images/en/technologies.png");
+            $("#hospitalityimg").attr('src', "images/en/hospitality.png");
+            $("#pubimg").attr('src', "images/en/public relations.png");
+            $("#booknowimg").attr('src', "images/en/book and order.png");
+
+            localStorage.setItem("language","en");
+        }
+        else{
+            $scope.isEnglish = "0";
+            $scope.isArabic = "1";
+            $("#loginimg").attr('src', "images/ar/login.png");
+            $("#technologimg").attr('src', "images/ar/technologies.png");
+            $("#hospitalityimg").attr('src', "images/ar/hospitality.png");
+            $("#pubimg").attr('src', "images/ar/public relations.png");
+            $("#booknowimg").attr('src', "images/ar/book and order.png");
+
+            localStorage.setItem("language","ar");
+        }
+
+        //$rootScope.locate=$location.url();
+        $rootScope.overclk=function()
+        {
+            angular.element('#showLeftPush').trigger('click');
+        }
+
+                       //Angular Translate function-
+
+                 //$rootScope.jsTrSimple = $translate.instant('SERVICE');
+                 //$rootScope.jsTrParams = $translate.instant('SERVICE_PARAMS', $scope.tlData);
+
+
+
+                 $rootScope.setLang = function(langKey) {
+                     _language = langKey;
+
+                     if(langKey == "ar"){
+                         $scope.isEnglish = "0";
+                         $scope.isArabic = "1";
+                         $("#loginimg").attr('src', "images/ar/login.png");
+                         $("#technologimg").attr('src', "images/ar/technologies.png");
+                         $("#hospitalityimg").attr('src', "images/ar/hospitality.png");
+                         $("#pubimg").attr('src', "images/ar/public relations.png");
+                         $("#booknowimg").attr('src', "images/ar/book and order.png");
+                     }
+                     else{
+                         $scope.isEnglish = "1";
+                         $scope.isArabic = "0";
+                         $("#loginimg").attr('src', "images/en/login.png");
+                         $("#technologimg").attr('src', "images/en/technologies.png");
+                         $("#hospitalityimg").attr('src', "images/en/hospitality.png");
+                         $("#pubimg").attr('src', "images/en/public relations.png");
+                         $("#booknowimg").attr('src', "images/en/book and order.png");
+                     }
+                     // You can change the language during runtime
+                     localStorage.setItem("language",langKey);
+                     $translate.use(langKey);
+
+                     // A data generated by the script have to be regenerated
+                     $rootScope.jsTrSimple = $translate.instant('SERVICE');
+                     $rootScope.jsTrParams = $translate.instant('SERVICE_PARAMS', $scope.tlData);
+
+                     window.location.reload(true);
+                 };
+
+                            //------Angular Translate function-------
+
+
+				var logincheck=localStorage.getItem("LoggedIn");
+                            //alert(logincheck);
+                            if(logincheck=="" || logincheck==null)
+                            {
+                                //location.href="#book";
+                                //alert("loggedout");
+                                $(".loghide,.homenav2div3").show();
+                                $(".user1hide").show();
+                                $(".userhide").hide();
+                                $(".outhide").hide();
+                                $(".dashhide").hide();
+                                $(".profhide").hide();
+                            }
+                            else if(logincheck==1)
+                            {
+
+                                if(localStorage.getItem("Role")=="Customer")
+                                {
+                                    $(".userhide").show();
+                                    $(".outhide").show();
+                                    $(".dashhide").show();
+                                    $(".profhide").show();
+                                    $(".loghide,.homenav2div3").hide();
+                                    $(".user1hide").hide();
+                                    $scope.username=localStorage.getItem("Name").toUpperCase();
+                                    $scope.number=localStorage.getItem("Mobile");
+                                }
+                                else if(localStorage.getItem("Role")=="BoUser")
+                                {
+                                    $(".userhide").show();
+                                    $(".outhide").show();
+                                    $(".dashhide").show();
+                                    $(".profhide").show();
+                                    $(".loghide,.homenav2div3").hide();
+                                    $(".user1hide").hide();
+                                    //location.reload();
+                                    location.href="#BODashboard";
+                                    //alert();
+                                    //setTimeout(function(){
+                                    //$scope.username=localStorage.getItem("Name").toUpperCase();
+                                }
+                                  else if(localStorage.getItem("Role")=="Admin")
+                                {
+                                
+                                    $(".userhide").show();
+                                      $(".user1hide").hide();
+                                    $(".outhide").show();
+                                    $(".dashhide").show();
+                                    $(".profhide").show();
+                                    $(".loghide,.homenav2div3").hide();
+                                  
+                                    //location.reload();
+                                    location.href="#myModal";
+                                    //alert();
+                                    //setTimeout(function(){
+                                    $scope.username=localStorage.getItem("Name").toUpperCase();
+                                      $scope.number=localStorage.getItem("Mobile");
+                                }
+
+
+
+
+                            }
+
+
+                            $scope.clickoo=function()
+                            {
+                                //alert("worko");
+                            }
+
+                            
+
+                            $scope.frgtpwd=function()
+                            {
+                                var validator = $( "#login-form" ).validate();
+                                validator.resetForm();
+
+                                $("#uname,#pwd,.submit-1,#frgpwd").hide();
+                                $("#mob,.submit-2").show();
+                                $(".homelogintitle").html(GetLocalString("HM-FORGOTPASSWORD", _language));
+                                /*alert("clicked");
+                                 $.ajax({
+                                           type: "POST",
+                                           url: "http://192.168.0.99/PROJECT%202/Lemon%20Development/Lemon/www/sms.php",
+                                           //data: jData,
+                                           contentType: "application/x-www-form-urlencoded",
+                                           //dataType: "json",
+                                           crossDomain: true,
+                                           success: function (msg) {
+                                              //alert(msg)
+
+                                           },
+                                           error: function (jqXHR, textStatus, errorThrown) {
+                                               alert(textStatus);
+                                           }
+                                       });*/
+                            }
+
+
+                            $(function() {
+                                // Setup form validation on the #register-form element
+                                $("#login-form").validate({
+                                    // Specify the validation rules
+                                    rules: {
+                                        Uname: {
+                                            required: true
+                                            //minlength: 8,
+                                            //maxlength: 8,
+                                            //number: true
+                                        },
+                                        Password: {
+                                            required: true,
+                                            minlength: 3,
+                                            maxlength: 15
+                                        },
+                                        agree: "required"
+                                    },
+
+                                    // Specify the validation error messages
+                                    messages: {
+                                        Uname: {
+                                            required: GetLocalString("HM-MOBILENO-REQUIRED", _language)
+                                            //minlength: "Minimun length is 8",
+                                            // maxlength: "Maximum length is 8",
+                                            // number: "Numbers only"
+                                        },
+                                        Password: {
+                                            required: GetLocalString("HM-PASSWORD-REQUIRED", _language),
+                                            minlength: GetLocalString("HM-PASSWORD-MIN", _language),
+                                            maxlength: GetLocalString("HM-PASSWORD-MAX", _language)
+                                        },
+                                        agree: GetLocalString("HM-ACCEPT", _language),
+                                    },
+
+                                    submitHandler: function(form) {
+                                        //specialalert("alert-1","Successfuly clicked",3000);
+                                        Login();
+                                    }
+                                });
+
+
+                            });
+
+                            // $state.go('registration');
+
+                            function Login()
+                            {
+                                //alert("btn click");
+                                var uname=$scope.uname;
+                                var pwd=$scope.pwd;
+                                spinshow();
+                                //$('#myModal').modal('toggle');
+                                //alert("uname:"+uname+"pwd:"+"******");
+
+                                var jData = {};
+                                jData.username = $scope.uname;//"98765432";
+                                jData.password = $scope.pwd;//"admin";
+                                $.ajax({
+                                    type: "POST",
+                                    url: root+"/isValidUser",
+                                    data: JSON.stringify(jData),
+                                    contentType: "application/x-www-form-urlencoded",
+                                    dataType: "json",
+                                    crossDomain: true,
+                                    success: function (msg) {
+                                        var k=JSON.parse(msg);
+                                        //document.write(msg)
+                                        //alert(k.IsValid);
+                                        console.log(k);
+                                        //alert(k.RoleName);
+
+                                        if(k.IsValid==1)
+                                        {
+                                        
+                                            localStorage.setItem("LoggedIn",1);
+                                            localStorage.setItem("Role",k.RoleName);
+                                            localStorage.setItem("Name",k.Name);
+                                            localStorage.setItem("Mobile",k.Mobile);
+                                            localStorage.setItem("UserID",$scope.uname);
+                                            $('#myModal').modal('toggle');
+                                            specialalert("alert-1",GetLocalString("HM-LOGINSUCCESS", _language),3000);
+                                            setTimeout(function(){
+                                                location.reload();
+                                            },2000);
+                                        }
+                                        else if(k.IsValid==0)
+                                        {
+                                            //alert("Please check your credentials");
+                                            specialalert("alert-2",GetLocalString("HM-CHECKCREDNTIALS", _language),3000);
+                                            $('#uname').val('');
+                                            $('#pwd').val('');
+                                        }
+                                        spinhide();
+                                        //localStorage.getItem("lastname");
+
+                                    },
+                                    error: function (jqXHR, textStatus, errorThrown) {
+                                        specialalert("alert-2",textStatus,3000);
+                                        //alert(textStatus);
+                                        spinhide();
+                                    }
+                                });
+
+
+                            }
+
+
+                            $scope.loginchk=function()
+                            {
+                                var validator = $( "#login-form" ).validate();
+                                validator.resetForm();
+
+                                var logincheck=localStorage.getItem("LoggedIn");
+                                //alert(logincheck);
+                                if(logincheck=="" || logincheck==null)
+                                {
+                                    $('#myModal').modal('toggle');
+                                    $("#uname,#pwd,.submit-1,#frgpwd").show();
+                                    $("#mob,.submit-2").hide();
+                                    $(".homelogintitle").html(GetLocalString("HM-LOGIN", _language));
+                                    $("#uname").attr("placeholder", GetLocalString("HM-USERID", _language));
+                                    $("#mob").attr("placeholder", GetLocalString("HM-MOBILENO", _language));
+
+                                }
+                                else if(logincheck==1)
+                                {
+                                    //alert("You are already logged in");
+                                    specialalert("alert-2","You are already logged in",3000);
+                                }
+
+
+                            }
+
+$rootScope.logout=function()
+                        {
+                            
+                              function onConfirm(buttonIndex) {
+                               
+                                 if(buttonIndex==1)
+                            {
+                                logoutfunc();
+                            }
+                            else
+                            {
+                                menuopenchk();
+                            }
+                                    }
+
+                                      navigator.notification.confirm(
+                                          'Are you sure to logout?', 
+                                           onConfirm,            
+                                          'Logout',           
+                                          ['Yes','Not Now']     
+                                                );
+
+
+
+
+                           
+
+
+
+
+
+
+
+
+
+
+
+                            }
+
+
+
+                            $rootScope.closmenu=function()
+                            {
+                                menuopenchk();
+                            }
+
+
+                            $scope.loginbtnactiv=function()
+                            {
+                                $('#myModal').modal('toggle');
+                                menuopenchk();
+
+                            }
+
+
+                            /*$window.addEventListener("offline", function ()
+                            {
+                             networkcheck(0)
+                            }, false);
+                            $window.addEventListener("online", function ()
+                            {
+                             networkcheck(1);
+                            }, false);*/
+
+                        });
+
+        LemonApp.controller('ProfileController', function($scope, $http, $state, $rootScope, $window, $sce) {
+
+            /*var k=$rootScope.networkcheck;
+            alert(k);*/
+            var logincheck=localStorage.getItem("LoggedIn");
+            //alert(logincheck);
+            if(logincheck=="" || logincheck==null)
+            {
+                //location.href="#book";
+                //alert("loggedout");
+                $(".loghide").show();
+                $(".user1hide").show();
+                $(".userhide").hide();
+                $(".outhide").hide();
+                $(".dashhide").hide();
+                $(".profhide").hide();
+            }
+            else if(logincheck==1)
+            {
+                $(".userhide").show();
+                $(".outhide").show();
+                $(".dashhide").show();
+                $(".profhide").show();
+                $(".loghide").hide();
+                $(".user1hide").hide();
+                $scope.username=localStorage.getItem("Name").toUpperCase();
+                $scope.number=localStorage.getItem("Mobile");
+            }
+
+            /*=========================Profile Detail ajax=================================*/
+
+            var jData = {};
+            jData.mobile = localStorage.getItem("Mobile");
+            //console.log(mobno);
+            spinshow();
+            var boo=$sce.trustAsResourceUrl(root+"/FetchDetailsBymob");
+            $.ajax({
+                type: "POST",
+                url: boo,
+                data: JSON.stringify(jData),
+                contentType: "application/x-www-form-urlencoded",
+                dataType: "json",
+                crossDomain: true,
+                success: function (msg) {
+                    // $scope.$apply(function(){
+                    //setTimeout(function(){
+                    A=JSON.parse(msg);
+                    console.log(A);
+                    if(A.Value==1)
+                    {
+                        //alert("got in");
+                        $scope.fname=A.FirstName;
+                        //$scope.lname=A.LastName;
+                        $scope.email=A.Email;
+                        $scope.pass="********";
+                        //$scope.email="vavavavavakutty@gmail.commme";
+                        $scope.mobile=parseInt(localStorage.getItem("Mobile"));
+                        angular.element('#clicko').trigger('click');
+                    }
+                    else if(A.Value==0)
+                    {
+                        //alert("sorry contact admin");
+                        specialalert("alert-2","sorry contact admin",3000);
+                    }
+                    spinhide();
+
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    //alert(textStatus);
+                    specialalert("alert-2",textStatus,3000);
+                    spinhide();
+                }
+            });
+
+            /*=========================///Profile Detail ajax=================================*/
+
+
+            //alert("loginController");
+            $(function() {
+                // Setup form validation on the #register-form element
+                $("#register-form").validate({
+                    // Specify the validation rules
+                    rules: {
+                        mobile: {
+                            required: true,
+                            minlength: 8,
+                            maxlength: 8,
+                            number: true
+                        },
+                        Fname: {
+                            required: true,
+                            minlength: 2
+                        },
+                        Lname: {
+                            required: true,
+                            minlength: 1
+                        },
+                        Email: {
+                            required: true,
+                            email: true
+                        },
+                        Password: {
+                            required: true,
+                            minlength: 8,
+                            maxlength: 10
+                        },
+                        agree: "required"
+                    },
+
+                    // Specify the validation error messages
+                    messages: {
+                        mobno: {
+                            required: GetLocalString("MOB-REQUIRED", _language),
+                            minlength: GetLocalString("MOB-MINLENGTH", _language),
+                            maxlength: GetLocalString("MOB-MAXLENGTH", _language),
+                            number: GetLocalString("MOB-NUMBERSONLY", _language)
+                        },
+                        Fname: {
+                            required: GetLocalString("FIRSTNAME-REQUIRED", _language),
+                            minlength: GetLocalString("FIRSTNAME-MINLENGTH", _language)
+                        },
+                        Lname: {
+                            required: GetLocalString("FIRSTNAME-REQUIRED", _language),
+                            minlength: GetLocalString("FIRSTNAME-MINLENGTH", _language)
+                        },
+                        Email: {
+                            required: GetLocalString("EMAIL-REQUIRED", _language),
+                            email: GetLocalString("EMAIL-VALID", _language)
+                        },
+                        Password: {
+                            required: GetLocalString("HM-PASSWORD-REQUIRED", _language),
+                            minlength: GetLocalString("HM-PASSWORD-MIN", _language),
+                            maxlength: GetLocalString("HM-PASSWORD-MAX", _language)
+                        },
+                        agree: "Please accept our policy"
+                    },
+
+                    submitHandler: function(form) {
+                        Editprofile();
+                        alert("ok");
+                    }
+                });
+                //});
+
+            });
+
+
+            function Editprofile()
+            {
+                var jData = {};
+                jData.UserID = localStorage.getItem("UserID");
+                jData.FirstName = $scope.fname;
+                //jData.mobile = $scope.pwd;
+                jData.Email= $scope.email;
+                jData.Password = $scope.password;
+                console.log(localStorage.getItem("UserID")+"\xa0"+$scope.fname+"\xa0"+$scope.email+"\xa0"+$scope.password);
+                $.ajax({
+                    type: "POST",
+                    url: root+"/ProfileEdit",
+                    data: JSON.stringify(jData),
+                    contentType: "application/x-www-form-urlencoded",
+                    dataType: "json",
+                    crossDomain: true,
+                    success: function (msg) {
+                        var k=JSON.parse(msg);
+                        console.log(k);
+
+                        if(k.value==1)
+                        {
+                            location.href="#Home";
+                            specialalert("alert-1",k.Message,3000);
+                        }
+                        else
+                        {
+                            specialalert("alert-2",k.Message,3000);
+                        }
+
+
+
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        //alert(textStatus);
+                        specialalert("alert-2",textStatus,3000);
+                        spinhide();
+                    }
+                });
+
+            }
+
+
+            /*$scope.logout=function()
+				 {
+				 $(".loghide").show();
+				 $(".user1hide").show();
+				 $(".outhide").hide();
+				 $(".userhide").hide();
+				 $(".dashhide").hide();
+				 $(".profhide").hide();
+				 localStorage.removeItem('LoggedIn');
+				 localStorage.removeItem('Role');
+				 localStorage.removeItem('Name');
+				 localStorage.removeItem('Mobile');
+				 location.href="#Home";
+				 location.reload();
+				 var k=$("#showLeftPush").position();
+							 if(k.left<600 || K.left<200)
+							 {
+							 $("#showLeftPush").click();
+							 }
+				 }*/
+
+            $scope.editpro=function()
+            {
+                //alert("koooi");
+                $(".profile-tab").hide();
+                //$(".editbut").hide();
+                $("#register-form").show();
+            }
+
+
+        });
+
+
+
+        LemonApp.controller('HospitalityController', function($scope, $http, $state, $rootScope, $window) {
+
+            //alert("HospitalityController");
+            var logincheck=localStorage.getItem("LoggedIn");
+            //alert(logincheck);
+            if(logincheck=="" || logincheck==null)
+            {
+                //location.href="#book";
+                //alert("loggedout");
+                $(".loghide").show();
+                $(".user1hide").show();
+                $(".userhide").hide();
+                $(".outhide").hide();
+                $(".dashhide").hide();
+                $(".profhide").hide();
+            }
+            else if(logincheck==1)
+            {
+                $(".userhide").show();
+                $(".outhide").show();
+                $(".dashhide").show();
+                $(".profhide").show();
+                $(".loghide").hide();
+                $(".user1hide").hide();
+                $scope.username=localStorage.getItem("Name").toUpperCase();
+                $scope.number=localStorage.getItem("Mobile");
+            }
+
+
+
+
+            /* $scope.logout=function()
+             {
+             $(".loghide").show();
+             $(".user1hide").show();
+             $(".outhide").hide();
+             $(".userhide").hide();
+             $(".dashhide").hide();
+             $(".profhide").hide();
+             localStorage.removeItem('LoggedIn');
+             localStorage.removeItem('Role');
+             localStorage.removeItem('Name');
+             localStorage.removeItem('Mobile');
+             location.href="#Home";
+             location.reload();
+             var k=$("#showLeftPush").position();
+                         if(k.left<600 || K.left<200)
+                         {
+                         $("#showLeftPush").click();
+                         }
+             }*/
+
+        });
+        LemonApp.controller('TechnologyController', function($scope, $http, $state, $rootScope, $window) {
+
+            //alert("TechnologyController");
+
+            var logincheck=localStorage.getItem("LoggedIn");
+            //alert(logincheck);
+            if(logincheck=="" || logincheck==null)
+            {
+                //location.href="#book";
+                //alert("loggedout");
+                $(".loghide").show();
+                $(".user1hide").show();
+                $(".userhide").hide();
+                $(".outhide").hide();
+                $(".dashhide").hide();
+                $(".profhide").hide();
+            }
+            else if(logincheck==1)
+            {
+                $(".userhide").show();
+                $(".outhide").show();
+                $(".dashhide").show();
+                $(".profhide").show();
+                $(".loghide").hide();
+                $(".user1hide").hide();
+                $scope.username=localStorage.getItem("Name").toUpperCase();
+                $scope.number=localStorage.getItem("Mobile");
+            }
+
+
+
+
+        });
+        LemonApp.controller('PublicRelationsController', function($scope, $http, $state, $rootScope, $window) {
+
+            //alert("PublicRelationsController");
+
+            var logincheck=localStorage.getItem("LoggedIn");
+            //alert(logincheck);
+            if(logincheck=="" || logincheck==null)
+            {
+                //location.href="#book";
+                //alert("loggedout");
+                $(".loghide").show();
+                $(".user1hide").show();
+                $(".userhide").hide();
+                $(".outhide").hide();
+                $(".dashhide").hide();
+                $(".profhide").hide();
+            }
+            else if(logincheck==1)
+            {
+                $(".userhide").show();
+                $(".outhide").show();
+                $(".dashhide").show();
+                $(".profhide").show();
+                $(".loghide").hide();
+                $(".user1hide").hide();
+                $scope.username=localStorage.getItem("Name").toUpperCase();
+                $scope.number=localStorage.getItem("Mobile");
+            }
+
+
+
+
+        });
+        LemonApp.controller('DashboardController', function($scope, $http, $state, $rootScope, $window,$sce) {
+
+
+            /*$(".userhide").show();
+			$(".outhide").show();
+			$(".dashhide").show();
+			$(".loghide").hide();
+			$scope.username=localStorage.getItem("Name").toUpperCase();*/
+
+            var logincheck=localStorage.getItem("LoggedIn");
+            //alert(logincheck);
+            if(logincheck=="" || logincheck==null)
+            {
+                //location.href="#book";
+                //alert("loggedout");
+                $(".loghide").show();
+                $(".user1hide").show();
+                $(".userhide").hide();
+                $(".outhide").hide();
+                $(".dashhide").hide();
+                $(".profhide").hide();
+            }
+            else if(logincheck==1)
+            {
+                $(".userhide").show();
+                $(".outhide").show();
+                $(".dashhide").show();
+                $(".profhide").show();
+                $(".loghide").hide();
+                $(".user1hide").hide();
+                $scope.username=localStorage.getItem("Name").toUpperCase();
+                $scope.number=localStorage.getItem("Mobile");
+            }
+
+
+
+
+            $scope.clickoo=function()
+            {
+                //alert("clickoo");
+            }
+
+            $scope.feedmodal=function(event,id)
+            {
+                $('#feedmodal').modal('toggle');
+                $scope.User=localStorage.getItem("Name");
+                $scope.Gsm=localStorage.getItem("Mobile");
+                $scope.Event=event+"-"+id;
+
+                $("#feedrating").raty({
+                    space: true,
+                    score: 0,
+                    size:30,
+                    starOn : 'images/star-on-big.png',
+                    starHalf:'images/star-half-big.png',
+                    starOff:'images/star-off-big.png',
+                    click: function(score, evt) {
+                        $scope.Rating=score;
+                    }
+                });
+
+                angular.element('#clicko').trigger('click');
+            }
+
+
+
+            $scope.feedgive=function()
+            {
+                /*alert($scope.User);
+                alert($scope.Gsm);
+                alert($scope.Event);
+                alert($scope.Feed);
+                alert($scope.Rating);*/
+
+                var jData = {};
+                jData.Mobile = $scope.Gsm;
+                jData.User =$scope.User;
+                jData.EventId = $scope.Event;
+                jData.Feedback = $scope.Feed;
+                jData.Rating = $scope.Rating;
+
+                //jData.password = "admidn";
+                spinshow();
+                var koo=$sce.trustAsResourceUrl(root+"/SaveFeedBack");
+                $.ajax({
+                    type: "POST",
+                    url: koo,
+                    data: JSON.stringify(jData),
+                    contentType: "application/x-www-form-urlencoded",
+                    dataType: "json",
+                    crossDomain: true,
+
+                    success: function (msg) {
+                        k=JSON.parse(msg);
+                        //$scope.mob=k;
+                        if(k.value==1)
+                        {
+                            specialalert("alert-1",k.Message,3000);
+                        }
+                        else if(k.value==4)
+                        {
+                            specialalert("alert-2",k.Message,3000);
+                        }
+                        spinhide();
+
+                        console.log(k);
+
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        //alert(textStatus);
+                        specialalert("alert-2",textStatus,3000);
+                        spinhide();
+                    }
+                });
+
+
+                $('#feedmodal').modal('toggle');
+
+            }
+
+
+            $(document).ready(function() {
+
+                /*=========================Booked Events========================================*/
+
+                var jData = {};
+                jData.Mobile = localStorage.getItem("Mobile");                   //"97997";
+                //jData.password = "admidn";
+                spinshow();
+                var koo=$sce.trustAsResourceUrl(root+"/VisitorNotClosedEvents");
+                $.ajax({
+                    type: "POST",
+                    url: koo,
+                    data: JSON.stringify(jData),
+                    contentType: "application/x-www-form-urlencoded",
+                    dataType: "json",
+                    crossDomain: true,
+
+                    success: function (msg) {
+                        if(msg=="No data found")
+                        {
+                            $(".tab1").hide();
+                        }
+                        else
+                        {
+                            k=JSON.parse(msg);
+                            $scope.mob=k;
+                            setTimeout(function(){
+                                angular.element('#clicko').trigger('click');
+                                $('#example').dataTable( {
+                                    "autoWidth": false
+                                } );
+                            }, 100);
+                        }
+                        spinhide();
+
+                        console.log(k);
+
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        //alert(textStatus);
+                        specialalert("alert-2",textStatus,3000);
+                        spinhide();
+                    }
+                });
+
+
+
+                $scope.statuscheck=function(status,index)
+                {
+                    if(status!="ENQUIRY")
+                    {
+                        var g="#"+"cd"+index;
+                        //alert(g);
+                        setTimeout(function(){
+                            $(g).hide();
+                        }, 150);
+                    }
+                }
+
+
+                $scope.Editevent=function(eventid)
+                {
+                    //console.log(eventid);
+
+                    var jData1 = {};
+                    jData1.EventId = eventid;
+                    //jData.password = "admidn";
+                    spinshow();
+                    var moo=$sce.trustAsResourceUrl(root+"/EditBookEvent");
+                    $.ajax({
+                        type: "POST",
+                        url: moo,
+                        data: JSON.stringify(jData1),
+                        contentType: "application/x-www-form-urlencoded",
+                        dataType: "json",
+                        crossDomain: true,
+                        success: function (msg) {
+                            var z=JSON.parse(msg);
+                            //$scope.mob1=l;
+                            console.log(z);
+                            $rootScope.land=z.EventDetails[0].Landmark;
+                            $rootScope.Wait=z.EventDetails[0].Waiters;
+                            $rootScope.Gues=z.EventDetails[0].Guests;
+                            $rootScope.edate=z.EventDetails[0].EventDate;
+                            $rootScope.remark=z.EventDetails[0].Remarks;
+
+                            $rootScope.typ=z.EventDetails[0].EventType;
+                            $rootScope.locate=z.EventDetails[0].Location;
+
+                            $rootScope.totitem=z.EventDetails[0].TotalItemCost;
+                            $rootScope.tot=z.EventDetails[0].TotalAmount;
+                            $rootScope.office=z.EventDetails[0].OfficeFees;
+                            $rootScope.waitertot=z.EventDetails[0].WaitersCost;
+                            $rootScope.waitcost1=(z.EventDetails[0].WaitersCost/z.EventDetails[0].Waiters);
+
+                            $rootScope.Eventz=z.EventDetails[0].EventID;
+
+                            if(z.EventItems)
+                            {
+                                //alert("yes items");
+                                $rootScope.griditem=z.EventItems;
+                                //console.log(z.EventItems);
+                            }
+                            else
+                            {
+                                //alert("no items");
+                            }
+                            //
+
+                            $state.go('Book');
+                            setTimeout(function()
+                            {
+                                $("#eventidentifier").val(2);
+                            },100);
+                            spinhide();
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            specialalert("alert-2",textStatus,3000);
+                            spinhide();
+                        }
+                    });
+
+                }
+
+                $scope.Removeevent=function(eventid)
+                {
+                    //console.log(eventid);
+
+                    var jData1 = {};
+                    jData1.EventId = eventid;
+                    //jData.password = "admidn";
+                    spinshow();
+                    var moo=$sce.trustAsResourceUrl(root+"/CancelEvent");
+                    $.ajax({
+                        type: "POST",
+                        url: moo,
+                        data: JSON.stringify(jData1),
+                        contentType: "application/x-www-form-urlencoded",
+                        dataType: "json",
+                        crossDomain: true,
+                        success: function (msg) {
+                            var y=JSON.parse(msg);
+                            //$scope.mob1=l;
+                            console.log(y);
+                            //specialalert("alert-2","",3000);
+                            /*$rootScope.land=z.EventDetails[0].Landmark;
+							$rootScope.Wait=z.EventDetails[0].Waiters;
+							$rootScope.Gues=z.EventDetails[0].Guests;
+							$rootScope.edate=z.EventDetails[0].EventDate;
+							$rootScope.remark=z.EventDetails[0].Remarks;
+
+							$rootScope.typ=z.EventDetails[0].EventType;
+							$rootScope.locate=z.EventDetails[0].Location;
+
+							$rootScope.totitem=z.EventDetails[0].TotalItemCost;
+							$rootScope.tot=z.EventDetails[0].TotalAmount;
+							$rootScope.office=z.EventDetails[0].OfficeFees;
+							$rootScope.waitertot=z.EventDetails[0].WaitersCost;
+							$rootScope.waitcost1=(z.EventDetails[0].WaitersCost/z.EventDetails[0].Waiters);
+
+							 if(z.EventItems)
+							 {
+							 //alert("yes items");
+							 $rootScope.griditem=z.EventItems;
+							 //console.log(z.EventItems);
+							 }
+							 else
+							 {
+							 //alert("no items");
+							 }
+							//
+
+							 $state.go('Book');
+							 setTimeout(function()
+							 {
+							 $("#eventidentifier").val(2);
+							 },100);*/
+                            //$state.go('Dashboard');
+                            location.reload();
+                            spinhide();
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            specialalert("alert-2",textStatus,3000);
+                            spinhide();
+                        }
+                    });
+
+                }
+                /*=========================/////Booked Events========================================*/
+
+                /*=========================Feedback========================================*/
+                var jData = {};
+                jData.Mobile = localStorage.getItem("Mobile");    //"97997";
+                //jData.password = "admidn";
+                spinshow();
+                var moo=$sce.trustAsResourceUrl(root+"/VisitorClosedEvents");
+                $.ajax({
+                    type: "POST",
+                    url: moo,
+                    data: JSON.stringify(jData),
+                    contentType: "application/x-www-form-urlencoded",
+                    dataType: "json",
+                    crossDomain: true,
+                    success: function (msg) {
+                        if(msg=="No data found")
+                        {
+                            $(".tab2").hide();
+                        }
+                        else
+                        {
+                            var l=JSON.parse(msg);
+                            $scope.mob1=l;
+                            setTimeout(function(){
+                                angular.element('#clicko').trigger('click');
+                                $('.example').dataTable( {
+                                    "autoWidth": false
+                                } );
+                            }, 300);
+
+                            //console.log(l);
+
+                        }
+                        spinhide();
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        //alert("not in");
+                        //alert(textStatus);
+                        specialalert("alert-2",textStatus,3000);
+                        spinhide();
+                    }
+                });
+                /*=========================/////Feedback========================================*/
+
+                /*=========================Dashboard booked details========================================*/
+                $scope.showdetails=function(x,y)
+                {
+                    //alert("id "+x);
+                    //alert("number "+y);
+                    $('#dashmodal1').modal('toggle');
+                    $scope.bookdetail=k[y];
+                    //angular.element('#clicko').trigger('click');
+                    //console.log(k.ID.lastIndexOf(x));
+                }
+                /*=========================////Dashboard booked details========================================*/
+            });
+
+        });
+
+        LemonApp.controller('BODashboardController', function($scope, $http, $state, $rootScope, $window, $sce) {
+
+            $scope.username=localStorage.getItem("Name").toUpperCase();
+            $scope.number=localStorage.getItem("Mobile");
+
+            $scope.rating=function(rate,i)
+            {
+                var l="#"+i;
+
+                $(l).raty({
+                    space: false,
+                    readOnly:  true,
+                    score: rate,
+                    starOn : 'images/star-on.png',
+                    starHalf:'images/star-half.png',
+                    starOff:'images/star-off.png'
+                });
+            }
+
+            $scope.Trating=function(rate)
+            {
+                setTimeout(function(){
+                    console.log("+");
+                    $(".trating").raty({
+                        space: false,
+                        readOnly:  true,
+                        score: rate,
+                        starOn : 'images/star-greenon.png',
+                        starHalf:'images/star-greenhalf.png',
+                        starOff:'images/star-off.png'
+                    });
+                }, 100);
+            }
+
+            $scope.Rrating=function(rate)
+            {
+                setTimeout(function(){
+                    console.log("-");
+                    $(".rrating").raty({
+                        space: false,
+                        readOnly:  true,
+                        score: rate,
+                        starOn : 'images/star-on.png',
+                        starHalf:'images/star-half.png',
+                        starOff:'images/star-off.png'
+                    });
+                }, 100);
+            }
+
+
+
+            $scope.clickoo=function()
+            {
+                //alert("clickoo");
+            }
+
+
+            $(document).ready(function() {
+
+                /*=========================Upcoming Events========================================*/
+
+                var jData = {};
+                jData.Mobile = localStorage.getItem("Mobile");    //"98765432";
+                //jData.password = "admidn";
+                spinshow();
+                var koo=$sce.trustAsResourceUrl(root+"/GetUpCommingEventsForBO");
+                $.ajax({
+                    type: "POST",
+                    url: koo,
+                    data: JSON.stringify(jData),
+                    contentType: "application/x-www-form-urlencoded",
+                    dataType: "json",
+                    crossDomain: true,
+
+                    success: function (msg) {
+                        if(msg=="No data found")
+                        {
+                            $(".tab1").hide();
+                        }
+                        else
+                        {
+                            k=JSON.parse(msg);
+                            $scope.mob=k;
+                            setTimeout(function(){
+                                angular.element('#clicko').trigger('click');
+                                $('#example').dataTable( {
+                                    "autoWidth": false
+                                } );
+                            }, 300);
+
+                            console.log(k);
+
+                        }
+                        spinhide();
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        //alert(textStatus);
+                        specialalert("alert-2",textStatus,3000);
+                        spinhide();
+                    }
+                });
+                /*=========================/////Upcoming Events========================================*/
+
+                /*=========================User feedback========================================*/
+                var jData = {};
+                jData.Mobile = localStorage.getItem("Mobile");       //"98765432";
+                //jData.password = "admidn";
+                spinshow();
+                var koo=$sce.trustAsResourceUrl(root+"/GetEventsFeedBack");
+                $.ajax({
+                    type: "POST",
+                    url: koo,
+                    data: JSON.stringify(jData),
+                    contentType: "application/x-www-form-urlencoded",
+                    dataType: "json",
+                    crossDomain: true,
+                    success: function (msg) {
+                        if(msg=="No data found")
+                        {
+                            $(".tab2").hide();
+                        }
+                        else
+                        {
+
+                            l=JSON.parse(msg);
+                            $scope.mob1=l;
+                            setTimeout(function(){
+                                angular.element('#clicko').trigger('click');
+                                $('.example').dataTable( {
+                                    "autoWidth": false
+                                } );
+                            }, 300);
+                            console.log("Start");
+                            console.log(l);
+                            console.log("Start");
+                        }
+                        spinhide();
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        //alert(textStatus);
+                        specialalert("alert-2",textStatus,3000);
+                        spinhide();
+                    }
+                });
+                /*=========================/////User feedback========================================*/
+                /*=========================Dashboard booked details========================================*/
+                $scope.showdetails=function(y)
+                {
+                    $('#dashmodal1').modal('toggle');
+                    $scope.bookdetail=k[y];
+                }
+                /*=========================////Dashboard booked details========================================*/
+                /*=========================Feedback details========================================*/
+                $scope.feeddetails=function(y)
+                {
+                    $('#dashmodal2').modal('toggle');
+                    $scope.feeddetail=l[y];
+                    var dates=l[y].EventDate;
+                    //alert(dates);
+                    var dateString = dates,
+                    dateParts = dateString.split(' '),
+                    timeParts = dateParts[1].split(':'),
+                    date;
+
+                    dateParts = dateParts[0].split('/');
+
+                    date = new Date(dateParts[2], parseInt(dateParts[1], 10) - 1, dateParts[0], timeParts[0], timeParts[1]);
+                    console.log(date.getTime());
+                    //alert(date);
+                    $scope.dategive=date;
+                }
+                /*=========================////Feedback details========================================*/
+
+            });
+
+        });
+
+
+        LemonApp.controller('BookController', function($scope, $http, $state, $rootScope, $window ,$sce) {
+            
+            
+            
+
+            $(document).ready(function () {
+                $scope.ItemAdded = false;
+
+
+                /*var jData1 = {};
+                     jData1.Option = "1";
+                   jData1.Details = [{
+                       "ItemTypeID": "Services", "ItemType": "1", "Item": "Qahwa", "ItemID": "28", "Size": "1",
+                       "Category": "NA", "Unit":"Days", "Price": "50"
+                   },{
+                       "ItemTypeID": "Services", "ItemType": "1", "Item": "Photography", "ItemID": "29", "Size": "1",
+                       "Category": "NA", "Unit": "Days", "Price": "150"
+    }];
+          console.log(jData1.Details);*/
+
+                /*=========================Eventtype date============================*/
+
+                /*var d = new Date();
+				var curr_date = d.getDate();
+				var curr_month = "" + d.getMonth() + 1; //Months are zero based
+				var curr_year = d.getFullYear();
+				var kk=(curr_year + "-" + curr_month + "-" + curr_date);
+				var x = document.getElementById("eventdate").min = "2014-10-01";
+				//var y = document.getElementById("eventdate").value = kk;*/
+
+                /*=========================//////Eventtype date============================*/
+
+                var logincheck=localStorage.getItem("LoggedIn");
+                //alert(logincheck);
+                if(logincheck=="" || logincheck==null)
+                {
+                    //location.href="#book";
+                    //alert("loggedout");
+                    $(".loghide").show();
+                    $(".user1hide").show();
+                    $(".userhide").hide();
+                    $(".outhide").hide();
+                    $(".dashhide").hide();
+                    $(".profhide").hide();
+                }
+                else if(logincheck==1)
+                {
+                    $(".userhide").show();
+                    $(".outhide").show();
+                    $(".dashhide").show();
+                    $(".profhide").show();
+                    $(".loghide").hide();
+                    $(".user1hide").hide();
+                    $scope.username=localStorage.getItem("Name").toUpperCase();
+                    $scope.number=localStorage.getItem("Mobile");
+
+                    var jData = {};
+                    jData.mobile = localStorage.getItem("Mobile");     //jData.mobile = "89456790 - new";"90909090 - old";"99600671 - BO";
+                    //console.log(mobno);
+                    spinshow();
+                    var boo=$sce.trustAsResourceUrl(root+"/FetchDetailsBymob");
+                    $.ajax({
+                        type: "POST",
+                        url: boo,
+                        data: JSON.stringify(jData),
+                        contentType: "application/x-www-form-urlencoded",
+                        dataType: "json",
+                        crossDomain: true,
+                        success: function (msg) {
+                            // $scope.$apply(function(){
+                            //setTimeout(function(){
+                            var b=JSON.parse(msg);
+                            //
+                            //console.log(b);
+                            //
+
+                            if(b.Value==0)
+                            {
+                                //alert("new customer");
+                                $scope.fname="";
+                                $scope.lname="";
+                                $scope.email="";
+                                $("#pass1").show();
+                            }
+                            else if(b.Value==1)
+                            {
+                                //alert("existing customer");
+                                $scope.fname=b.FirstName;
+                                //$scope.lname=b.LastName;
+                                $scope.email=b.Email;
+                                $scope.mobile=parseInt(localStorage.getItem("Mobile"));
+                                $("#pass1").hide();
+                            }
+                            else if(b.Value==2)
+                            {
+                                //alert("BO users not allowed to book and order");
+                                specialalert("alert-2","BO users not allowed to book and order",3000);
+                                $scope.mobile="";
+                                $scope.fname="";
+                                $scope.lname="";
+                                $scope.email="";
+                                $("#pass1").hide();
+                            }
+
+                            angular.element('#clicko').trigger('click');
+                            $("#mobile,#fname,#lname,#email").attr("disabled", "disabled");
+                            spinhide();
+                            //}, 10);
+                            //});
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            //alert(textStatus);
+                            specialalert("alert-2",textStatus,3000);
+                            spinhide();
+                        }
+                    });
+
+                }
+                //<!--=================Edit event Data Collection =========================================== -->
+
+
+                    setTimeout(function()
+                    {
+                        //alert($("#eventidentifier").val());
+                        if($("#eventidentifier").val()==2)
+                        {
+                            $scope.landmark=$rootScope.land;
+                            $scope.Waiters=$rootScope.Wait;
+                            $scope.Guests=parseInt($rootScope.Gues);
+                            //alert($rootScope.Gues);
+                            /*dato=$rootScope.edate.split(" ");
+                            date1=dato[0].split("/");
+                            var d=new Date(date1[2], date1[1] - 1, date1[0]);
+                            alert(d);
+                             month = '' + (d.getMonth() + 1),
+                             day = '' + d.getDate(),
+                             year = d.getFullYear();
+                             var dates=[year, month, day].join('-');
+                            //alert(dates);
+                            $("#eventdate").val(dates);
+                            //$scope.eventdate=dates;*/
+                            var bkDate = new Date($rootScope.edate.replace(/-/g, "/"));
+                            var day = bkDate.getDate(); //Date of the month: 2 in our example
+                            var month = bkDate.getMonth() + 1; //Month of the Year: 0-based index, so 1 in our example
+                            var year = bkDate.getFullYear();
+                            //var tst = $.format.date("2009-12-18 10:54:50.546", "dd/MM/yyyy");//
+                           
+                            //var newDate = new Date(tst);
+                            $("#eventdate").attr("type", "text");
+                            $("#eventdate").attr("disabled", "disabled");
+                            $scope.eventdate = day + "/" + month + "/" + year;
+                            $scope.remarks = $rootScope.remark; //$rootScope.edate;
+                            //$("#eventdate").val("2014-02-09");
+                            //$scope.eventdate = $rootScope.edate
+                            $('#Eventtype').val($rootScope.typ);
+                            
+                            /*var now = new Date($rootScope.edate);
+
+                            var day = ("0" + now.getDate()).slice(-2);
+                            var month = ("0" + (now.getMonth() + 1)).slice(-2);
+
+                            var today = day+"/"+month+"/"+now.getFullYear() ;
+                            $('#eventdate').val(today);*/
+
+                            
+
+                            $('#Locationname').val($rootScope.locate);
+                            $scope.itemcost=$rootScope.totitem;
+                            $scope.totaltopay=$rootScope.tot;
+                            $scope.officefees=$rootScope.office;
+                            //alert($rootScope.office);
+                            $scope.waitercost=$rootScope.waitertot;
+                            $rootScope.waitcost=$rootScope.waitcost1
+
+                            $scope.Eid=$rootScope.Eventz;
+
+                            if($rootScope.griditem)
+                            {
+                                //alert("yes in");
+                                gridarray=$rootScope.griditem;
+                                $scope.gridarr=gridarray;
+                                gridshohid();
+                                gridstotal();
+                            }
+                            else
+                            {
+                                //alert("no out");
+                            }
+
+
+                            angular.element('#clicko').trigger('click');
+
+
+                        }
+
+                        else
+                        {
+                            $("#eventidentifier").val(1);
+                            $scope.Eid=0;
+                        }
+
+                    },2000);
+               // <!--=================//////////////Edit event Data Collection =========================================== -->
+
+
+
+
+            /*setTimeout(function()
+            {
+            alert($("#eventidentifier").val());
+            alert($scope.Eid);
+            },2000);*/
+
+            //LemonWCFServices/Login.svc/GetBookEventMasters
+
+            var jData = {};
+
+                if(_language == "en")
+                    jData.Lang = "en-us";
+                else
+                    jData.Lang = "ar-om";
+                //jData.password = "admidn";
+                spinshow();
+                var koo=$sce.trustAsResourceUrl(root+"/GetBookEventMasters");
+                $.ajax({
+                    type: "POST",
+                    url: koo,
+                    data: JSON.stringify(jData),
+                    contentType: "application/x-www-form-urlencoded",
+                    dataType: "json",
+                    crossDomain: true,
+                    success: function (msg) {
+                        var l=JSON.parse(msg);
+                        $scope.location1=l.Location;
+                        $scope.eventtype1=l.EventType;
+                        angular.element('#clicko').trigger('click');
+                        spinhide();
+                        /*setTimeout(function(){
+						angular.element('#clicko').trigger('click');
+							$('.example').dataTable( {
+							  "autoWidth": false
+							} );
+						}, 300);*/
+
+                        console.log(l);
+
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        //alert(textStatus);
+                        specialalert("alert-2",textStatus,3000);
+                        spinhide();
+                    }
+                });
+
+
+
+            });
+
+            $(function() {
+                // Setup form validation on the #register-form element
+                $("#register-form").validate({
+                    // Specify the validation rules
+                    rules: {
+                        Mobno: {
+                            required: true,
+                            minlength: 8,
+                            maxlength: 8,
+                            number: true
+                        },
+                        Fname: {
+                            required: true,
+                            minlength: 2
+                        },
+                        Lname: {
+                            required: true,
+                            minlength: 1
+                        },
+                        Email: {
+                            required: true,
+                            email: true
+                        },
+                        Password: {
+                            required: true,
+                            minlength: 8,
+                            maxlength: 10
+                        },
+                        Locationname: {
+                            required: true
+                        },
+                        Landmark: {
+                            required: true,
+                            minlength: 2
+                        },
+                        Eventtype: {
+                            required: true
+                        },
+                        Time: {
+                            required: true
+                        },
+                        /*Eday: {
+							required: true
+						},*/
+                        Waitersno: {
+                            required: true,
+                            number: true,
+                            maxlength:3
+                        },
+                        Guestno: {
+                            required: true,
+                            number: true,
+                            maxlength:4
+                        },
+                        agree: "required"
+                    },
+
+                    // Specify the validation error messages
+                    messages: {
+                        Mobno: {
+                            required: GetLocalString("MOB-REQUIRED", _language),
+                            minlength: GetLocalString("MOB-MINLENGTH", _language),
+                            maxlength: GetLocalString("MOB-MAXLENGTH", _language),
+                            number: GetLocalString("MOB-NUMBERSONLY", _language)
+                        },
+                        Fname: {
+                            required: GetLocalString("FIRSTNAME-REQUIRED", _language),
+                            minlength: GetLocalString("FIRSTNAME-MINLENGTH", _language)
+                        },
+                        Lname: {
+                            required: GetLocalString("FIRSTNAME-REQUIRED", _language),
+                            minlength: GetLocalString("FIRSTNAME-MINLENGTH", _language)
+                        },
+                        Email: {
+                            required: GetLocalString("EMAIL-REQUIRED", _language),
+                            email: GetLocalString("EMAIL-VALID", _language)
+                        },
+                        Password: {
+                            required: GetLocalString("PASS-REQUIRED", _language),
+                            minlength: GetLocalString("PASS-MINLENGTH", _language),
+                            maxlength: GetLocalString("PASS-MAXLENGTH", _language)
+                        },
+                        Locationname: {
+                            required: GetLocalString("LOCATION-REQUIRED", _language)
+                        },
+                        Landmark: {
+                            required: GetLocalString("LANDMARK-REQUIRED", _language),
+                            minlength: GetLocalString("LANDMARK-MINLENGTH", _language)
+                        },
+                        Eventtype: {
+                            required: GetLocalString("EVENT-REQUIRED", _language)
+                        },
+                        Time: {
+                            required: GetLocalString("TIME-REQUIRED", _language)
+                        },
+                        /*Eday: {
+							required: "Event date required"
+						},*/
+                        Waitersno: {
+                            required: GetLocalString("WAITER-REQUIRED", _language),
+                            number: GetLocalString("WAITER-NUMBERSONLY", _language),
+                            maxlength: GetLocalString("WAITER-MAXLENGTH", _language)
+
+                        },
+                        Guestno: {
+                            required: GetLocalString("GUESTNUMBER-REQUIRED", _language),
+                            number: GetLocalString("GUESTNUMBER-NUMBERSONLY", _language),
+                            maxlength:GetLocalString("GUESTNUMBER-MAXLENGTH", _language)
+                        },
+                        agree: GetLocalString("ACCEPT-POLICY", _language)
+                    },
+
+                    submitHandler: function(form) {
+                        //form.submit();
+                        //contactbutton();
+                        //alert("kitti");
+                        //specialalert("alert-2","submit activated",3000);
+                       
+                        var jData = {};
+                        spinshow();
+                        /* alert("mobile"+$scope.mobile);
+                         alert("fname"+$scope.fname);
+                         alert("lname"+$scope.lname);
+                         alert("email"+$scope.email);
+                         alert("total"+$rootScope.tot);*/
+                        //alert("email"+$scope.email);
+
+                        var string = gridarray;
+
+                        jData.Details = JSON.stringify(string);
+                        jData.Option = $("#eventidentifier").val();//insert =1 update =2
+                        jData.Location = $("#Locationname").val();//Id of location
+                        jData.LandMark = $scope.landmark;//mandatory
+                        jData.EventType = $scope.Eventtype;
+                        jData.EventDate = $scope.eventdate;
+                        jData.EventEndDate = $scope.eventdate;
+                        jData.Waiters = $scope.Waiters;
+                        jData.Guests = $scope.Guests;
+                        jData.CreatedModifiedBy = "0";
+                        jData.EventTime  = $scope.Eventtime;//if malka timingmaster other time contol
+                        /* jData.Duration = "1";
+                         jData.DurationUnits = "Days";
+
+                         jData.Dates = "0";
+                         if($scope.qahwa==true)
+                         {jData.Qahwa = "1";}
+                         else
+                         {jData.Qahwa = "0";}
+                         if($scope.Video==true)
+                         {jData.Video = "1";}
+                         else
+                         {jData.Video = "0";}
+                         if($scope.Photography==true)
+                         {jData.Photography = "1";}
+                         else
+                         {jData.Photography = "0";}
+                   */
+                        jData.IsMobileNumberVerified="1";//if verified 1 or zero
+                        jData.IsEmailVerified="1";//if verified 1 or zero
+                        jData.TotalAmount = $rootScope.tot;
+                        jData.Balance = $rootScope.tot;
+                        jData.EventId = $scope.Eid;//insert 0 update event auto id
+                        jData.Discount = "0";
+                        jData.TotalPaid = "0";
+                        jData.isConfirmed = "0";
+                        jData.MobileNumber  = $scope.mobile;           //90909090
+                        jData.Firstname  = $scope.fname;
+                        //jData.Lastname = $scope.lname;
+                        jData.Email = $scope.email;
+                        jData.Password = $scope.password;
+                        jData.Remarks = $scope.remarks;
+
+                        console.log(jData);
+
+                        var zoo=$sce.trustAsResourceUrl(root+"/SaveBookEvents");
+                        $.ajax({
+                            type: "POST",
+                            url: zoo,
+                            data: JSON.stringify(jData),
+                            contentType: "application/x-www-form-urlencoded",
+                            dataType: "json",
+                            crossDomain: true,
+                            success: function (msg) {
+                                z=JSON.parse(msg);
+                                if(z.value==1)
+                                {
+                                    specialalert("alert-1","Event booking enquiry sent succesfully",3000);
+                                    //alert("Event booking enquiry sent succesfully");
+                                    setTimeout(function(){
+                                        location.href="#Home";
+                                    },1500);
+                                }
+                                else if(z.value==2)
+                                {
+                                    specialalert("alert-1","Event Updated succesfully",3000);
+                                    setTimeout(function(){
+                                        location.href="#Home";
+                                    },1500);
+                                }
+                                else
+                                {
+                                    specialalert("alert-2","Event booking enquiry Failed please check the details again",3000);
+                                    //alert("Event booking enquiry Failed please check the details again");
+                                }
+                                //$scope.eventtym=z;
+                                angular.element('#clicko').trigger('click');
+                                console.log(z);
+                                spinhide();
+                            },
+                            error: function (jqXHR, textStatus, errorThrown) {
+                                //alert(textStatus);
+                                specialalert("alert-2",textStatus,3000);
+                                spinhide();
+                            }
+                        });
+
+
+                    }
+                });
+                //});
+
+            });
+
+
+
+
+
+
+
+
+
+            /*==============================MOBILE CHECK===========================*/
+
+            $scope.mobilecheck=function(mobno)
+            {
+                var moblen=$("#mobile").val().length;
+
+                //alert(moblen);
+                //var ke=$scope.mobile.length;
+                //alert($scope.mobile);
+                if(moblen>7 && moblen<11)
+                {
+                    spinshow();
+                    //alert(moblen);
+                    var jData = {};
+                    jData.mobile = mobno;     //jData.mobile = "89456790 - new";"90909090 - old";"99600671 - BO";
+                    console.log(mobno);
+
+                    var boo=$sce.trustAsResourceUrl(root+"/FetchDetailsBymob");
+                    $.ajax({
+                        type: "POST",
+                        url: boo,
+                        data: JSON.stringify(jData),
+                        contentType: "application/x-www-form-urlencoded",
+                        dataType: "json",
+                        crossDomain: true,
+                        success: function (msg) {
+                            // $scope.$apply(function(){
+                            //setTimeout(function(){
+                            var b=JSON.parse(msg);
+                            //$scope.itemname1=b;
+                            //$scope.itemname2=b.Unit;
+
+                            if(b.Value==0)
+                            {
+                                //alert("new customer");
+                                $scope.fname="";
+                                $scope.lname="";
+                                $scope.email="";
+                                $("#pass1").show();
+                            }
+                            else if(b.Value==1)
+                            {
+                                //alert("existing customer");
+                                $scope.fname=b.FirstName;
+                                $scope.lname=b.LastName;
+                                $scope.email=b.Email;
+                                $("#pass1").hide();
+                            }
+                            else if(b.Value==2)
+                            {
+                                specialalert("alert-2","BO users not allowed to book and order",3000);
+                                //alert("BO users not allowed to book and order");
+                                $scope.mobile="";
+                                $scope.fname="";
+                                $scope.lname="";
+                                $scope.email="";
+                                $("#pass1").hide();
+                            }
+
+                            angular.element('#clicko').trigger('click');
+                            console.log(b);
+                            spinhide();
+                            //}, 10);
+                            //});
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            //alert(textStatus);
+                            specialalert("alert-2",textStatus,3000);
+                            spinhide();
+                        }
+                    });
+
+                }
+            }
+            /*==============================////MOBILE CHECK===========================*/
+
+            $scope.eventselect=function(events)
+            {
+                $("#etime1").hide();
+                $("#etime2").hide();
+                spinshow();
+                //alert(events);
+                var jData = {};
+                jData.EventTypeId = events;
+                var zoo=$sce.trustAsResourceUrl(root+"/FetchWaiterDetailsandOfficeFees");
+                $.ajax({
+                    type: "POST",
+                    url: zoo,
+                    data: JSON.stringify(jData),
+                    contentType: "application/x-www-form-urlencoded",
+                    dataType: "json",
+                    crossDomain: true,
+                    success: function (msg) {
+                        // $scope.$apply(function(){
+                        //setTimeout(function(){
+                        z=JSON.parse(msg);
+                        //$scope.itemname1=z;
+                        //$scope.itemname2=b.Unit;
+                        console.log(z);
+                        $("#Waiters").prop({
+                            "min" : z.MinWaiter          // values (or variables) here
+                        });
+                        $scope.Waiters=z.MinWaiter;
+                        $rootScope.waitcost=z.WaiterCost;
+                        $rootScope.officecost=z.OfficeFee;
+                        //alert(z.WaterWost);
+
+
+                        setTimeout(function(){
+                            gridstotal();          //updating the total based on waiters
+                            angular.element('#clicko').trigger('click');
+                        }, 20);
+
+
+                        //console.log(z);
+
+                        spinhide();
+
+                        //}, 10);
+                        //});
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        //alert(textStatus);
+                        specialalert("alert-2",textStatus,3000);
+                        spinhide();
+                    }
+                });
+
+                if(events==1)
+                {
+                    //alert("thanne");
+                    $("#etime2").show();
+                    spinshow();
+                    var jData = {};
+                    var zoo=$sce.trustAsResourceUrl(root+"/GetMalkaTimings");
+                    $.ajax({
+                        type: "POST",
+                        url: zoo,
+                        data: JSON.stringify(jData),
+                        contentType: "application/x-www-form-urlencoded",
+                        dataType: "json",
+                        crossDomain: true,
+                        success: function (msg) {
+                            z=JSON.parse(msg);
+                            $scope.eventtym=z;
+                            angular.element('#clicko').trigger('click');
+
+                            console.log(z);
+
+                            spinhide();
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            //alert(textStatus);
+                            specialalert("alert-2",textStatus,3000);
+                            spinhide();
+                        }
+                    });
+
+                }
+                else
+                {
+                    //alert("vere");
+                    $("#etime1").show();
+                }
+            }
+
+           
+
+            /*==============================ADD ITEM FUNCTIONS===========================*/
+
+            $scope.addclick=function(act,oper)
+            {
+
+                $scope.action=act;           // Add items insertion or deletion number
+                $scope.operation=oper;		// Add items insertion or deletion number
+                $scope.modify=1;			// to know Edit item or add item
+                spinshow();
+
+                $('#itemtype').prop('selectedIndex',0);
+                $("#quantity,#Itemname,#unit").prop('disabled', true);
+                $("#price,#quantity,#total,#unit,#Itemname").val("");
+
+                var jData21 = {};
+                if(_language == "en")
+                    jData21.Lang = "en-us";
+                else
+                    jData21.Lang = "ar-om";
+
+                var loo=$sce.trustAsResourceUrl(root+"/GetItemType");
+                $.ajax({
+                    type: "POST",
+                    url: loo,
+                    data: JSON.stringify(jData21),
+                    contentType: "application/x-www-form-urlencoded",
+                    dataType: "json",
+                    crossDomain: true,
+                    success: function (msg) {
+
+                        // $scope.$apply(function(){
+                        var add1=JSON.parse(msg);
+                        $scope.item1=add1;
+                        //$scope.eventtype1=l.EventType;
+                        angular.element('#clicko').trigger('click');
+
+                        console.log(add1);
+
+
+                        spinhide();
+                        //});
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        //alert(textStatus);
+                        specialalert("alert-2",textStatus,3000);
+                        spinhide();
+                    }
+                });
+            }
+
+            $scope.itemnamefetch=function(type)
+            {
+
+                //$("#Itemname,#Category,#Size,#unit").prop('selectedIndex',0).find('option:not(:first)').remove();
+                //$('#Category,#Size,#unit').find('option:not(:first)').remove();
+                //$('#Size,#unit').find('option').remove().end().prepend('<option selected="selected" value="">select</option>').find('option:first').attr("selected","selected");
+                //$("#Itemname,#Category,#Size,#unit").empty().append('<option selected="selected" value="">select</option>');
+                //$("#unit,#Size").find('option:not(:first)').remove();3
+
+
+
+
+                if(type!="")
+                {
+                    //$('#Itemname').prop('selectedIndex',0);
+                    $("#quantity,#unit").prop('disabled', true);
+                    $("#price,#quantity,#total,#unit").val("");
+                    spinshow();
+
+
+                    var jData = {};
+                    jData.ItemTypeID = type;
+
+                    if(_language == "en")
+                        jData.Lang = "en-us";
+                    else
+                        jData.Lang = "ar-om";
+
+                    //jData.password = "admidn";
+                    var boo=$sce.trustAsResourceUrl(root+"/GetSubItems");
+                    $.ajax({
+                        type: "POST",
+                        url: boo,
+                        data: JSON.stringify(jData),
+                        contentType: "application/x-www-form-urlencoded",
+                        dataType: "json",
+                        crossDomain: true,
+                        success: function (msg) {
+                            // $scope.$apply(function(){
+                            setTimeout(function(){
+                                var b=JSON.parse(msg);
+                                $scope.itemname1=b;
+                                //$scope.itemname2=b.Unit;
+                                angular.element('#clicko').trigger('click');
+                                $("#Itemname").prop('disabled', false);
+
+                                console.log(b);
+                                spinhide();
+                            }, 10);
+                            //});
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            //alert(textStatus);
+                            specialalert("alert-2",textStatus,3000);
+                            spinhide();
+                        }
+                    });
+                }
+                else
+                {
+                    $('#itemtype,#Itemname,#unit').prop('selectedIndex',0);
+                    $("#quantity,#Itemname,#unit").prop('disabled', true);
+                }
+            }
+
+
+
+
+            $scope.unitfetch=function(subitem)
+            {
+
+                if(subitem!="")
+                {
+                    spinshow();
+                    //$('#unit').prop('selectedIndex',0);
+                    $("#quantity").prop('disabled', true);
+                    $("#price,#quantity,#total,#unit").val("");
+                    //$('#unit').find('option').remove().end().prepend('<option selected="selected" value="">select</option>').find('option:first').attr("selected","selected");
+
+                    //$("#unit").val("");
+                    //$('#unit').find('option').remove().end().prepend('<option value="">select</option>').val('');
+                    //$("#unit").empty();
+
+
+                    var jData = {};
+                    jData.SubItemID = subitem;
+
+                    //angular.element('#clicko').trigger('click');
+                    //jData.password = "admidn";
+                    var eoo=$sce.trustAsResourceUrl(root+"/FetchUnitByItemDetails");
+                    $.ajax({
+                        type: "POST",
+                        url: eoo,
+                        data: JSON.stringify(jData),
+                        contentType: "application/x-www-form-urlencoded",
+                        dataType: "json",
+                        crossDomain: true,
+                        success: function (msg) {
+                            var e=JSON.parse(msg);
+                            $scope.unit =e[0].Unit;
+                            //$("#unit").prop('disabled', false);
+                            console.log(e);
+                            spinhide();
+                            angular.element('#clicko').trigger('click');
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            //alert(textStatus);
+                            specialalert("alert-2",textStatus,3000);
+                            spinhide();
+                        }
+                    });
+
+
+                    var jData1 = {};
+                    jData1.SubItemID = subitem;
+
+                    //jData.password = "admidn";
+                    var foo=$sce.trustAsResourceUrl(root+"/FetchTotal");
+                    $.ajax({
+                        type: "POST",
+                        url: foo,
+                        data: JSON.stringify(jData1),
+                        contentType: "application/x-www-form-urlencoded",
+                        dataType: "json",
+                        crossDomain: true,
+                        success: function (msg) {
+                            var f=JSON.parse(msg);
+                            //alert(f.sellrate);
+                            $scope.price=f[0].sellrate;
+                            $scope.price1=f[0].ItemID;
+                            $scope.price2=f[0].ItemName;
+                            $scope.price3=f[0].SubItemName;
+                            console.log(f);
+                            //alert($("#priceid").val());
+                            $("#quantity").prop('disabled', false);
+                            angular.element('#clicko').trigger('click');
+                            spinhide();
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            //alert(textStatus);
+                            specialalert("alert-2",textStatus,3000);
+                            spinhide();
+                        }
+                    });
+
+                }
+                else
+                {
+                    $('#Itemname,#unit').prop('selectedIndex',0);
+                    $("#quantity,#unit").prop('disabled', true);
+                }
+            }
+
+            /*$scope.pricefetch=function(subitem)
+            {
+            spinshow();
+            $("#quantity,#total").val("");
+             //$("#quantity").prop('disabled', true);
+            //alert(unit+" "+size+" "+cat+" "+name+" "+type);
+             angular.element('#clicko').trigger('click');
+                var jData = {};
+                     jData.SubItemID = subitem;
+
+                    //jData.password = "admidn";
+                    var foo=$sce.trustAsResourceUrl(root+"/FetchTotal");
+                    $.ajax({
+                        type: "POST",
+                        url: foo,
+                        data: JSON.stringify(jData),
+                        contentType: "application/x-www-form-urlencoded",
+                        dataType: "json",
+                        crossDomain: true,
+                      success: function (msg) {
+                        var f=JSON.parse(msg);
+                        //alert(f.sellrate);
+                        $scope.price=f[0].sellrate;
+                        $scope.price1=f[0].ItemID;
+                        $scope.price2=f[0].ItemName;
+                        $scope.price3=f[0].SubItemName;
+                        console.log(f);
+                        //alert($("#priceid").val());
+                        $("#quantity").prop('disabled', false);
+                        angular.element('#clicko').trigger('click');
+                        spinhide();
+                      },
+                      error: function (jqXHR, textStatus, errorThrown) {
+                            //alert(textStatus);
+                            specialalert("alert-2",textStatus,3000);
+                            spinhide();
+                      }
+                    });
+            }*/
+
+            $scope.totalfunc=function(price,quantity)
+            {
+                //alert("total");
+                $scope.total=price*quantity;
+                //angular.element('#clicko').trigger('click');
+            }
+
+
+
+            gridarray=[];
+            //gridtotal="";
+
+
+            /*===============================GRID Add Items===========================*/
+            $(function() {
+                // Setup form validation on the #register-form element
+                $("#add-item").validate({
+                    // Specify the validation rules
+                    rules: {
+                        Itemtype: {
+                            required: true
+                        },
+                        Itemname: {
+                            required: true
+                        },
+                        unit: {
+                            required: true
+                        },
+                        price: {
+                            required: true
+                        },
+                        quantity: {
+                            required: true
+                        },
+
+                        /*mobno: {
+							required: true,
+							minlength: 8,
+							 maxlength: 10,
+							 number: true
+						},
+						email: {
+							required: true,
+							email: true
+						},
+						txtarea: {
+							required: true,
+							minlength: 2,
+							 maxlength: 100
+						},
+						TimeFrame: {
+							required: true
+						},*/
+                        agree: "required"
+                    },
+
+                    // Specify the validation error messages
+                    messages: {
+                        Itemtype: {
+                            required: "please select any option",
+                            //minlength: "minimun length is 2"
+                        },
+                        Itemname: {
+                            required: "please select any option",
+                            //minlength: "minimun length is 2"
+                        },
+                        unit: {
+                            required: "Unit required",
+                            //minlength: "minimun length is 2"
+                        },
+                        price: {
+                            required: "Price required",
+                            //minlength: "minimun length is 2"
+                        },
+                        quantity: {
+                            required: "Please input quantity",
+                            //minlength: "minimun length is 2"
+                        },
+                        /*mobno: {
+							required: "Mobile number required",
+							minlength: "Minimun length is 8",
+							 maxlength: "Maximum length is 10",
+							 number: "Numbers only"
+						},
+						email: {
+							required: "Email Required",
+							email: "Please enter a valid email ID"
+						},
+						txtarea: {
+							required: "Your message please",
+							minlength: "Minimun length is 2",
+							maxlength: "Maximum length is 100",
+						},
+						TimeFrame: {
+							required: "please make a selection"
+						},*/
+                        agree: "Please accept our policy"
+                    },
+
+                    submitHandler: function(form) {
+                        //form.submit();
+                        addoitem();
+                        //alert("Ok ADD");
+                    }
+                });
+                //});
+
+            });
+
+
+            /*===============================GRID Add Items===========================*/
+
+
+            /*===============================GRID Add Items===========================*/
+
+            function addoitem()
+            {
+                var typeID=$scope.Itemtype;
+                var subID=$scope.Itemname;
+                var Itemname=$scope.price2;
+                var subItemname=$scope.price3;
+                var unit=$scope.unit;
+                var price=$scope.price;
+                var quantity=$scope.quantity ;
+                var total=$scope.total;
+                var itemid=$scope.price1;
+                var action=$scope.action;
+                var operation=$scope.operation;
+                var modify=$scope.modify;
+                //alert(typeID+" "+subID+" "+Itemname+" "+subItemname+" "+unit+" "+price+" "+quantity+" "+total+" "+itemid);
+                //alert(action+" "+operation);
+                if(modify==1)
+                {
+
+                }
+                else if(modify==2)
+                {
+                    for(var i=0;i<gridarray.length;i++){    //deleting items
+                        if(gridarray[i].ItemID == itemid){
+                            gridarray.splice(i,1);
+                        }
+                    }
+                }
+                gridarray.push({ID:0,EventID:0,ItemID:itemid,SubItem:subID,Unit:unit,Quantity:quantity,Total:total,Price:price,Action:action,Operation:operation,ItemType:Itemname,SubItemName:subItemname});
+                console.log(gridarray);
+                $scope.gridarr=gridarray;
+                gridshohid();
+                gridstotal();             //Updating Total
+                angular.element('#clicko').trigger('click');
+                $('#additem').modal('hide');
+            }
+
+
+            /*===============================////GRID Add Items===========================*/
+
+
+            /*===============================Waiter Update===========================*/
+            $scope.waiterupdate=function()
+            {
+                gridstotal();              //updating the total based on waiters
+            }
+            /*===============================///Waiter Update===========================*/
+
+
+            /*===============================GRID Row EDIT===========================*/
+            $scope.Editrow=function(Editid)
+            {
+                $('#additem').modal('toggle');
+
+
+                for(var i=0;i<gridarray.length;i++)
+                {    //deleting items
+                    if(gridarray[i].ItemID == Editid)
+                    {
+                        $scope.action=gridarray[i].Action;
+                        $scope.operation=gridarray[i].Operation;
+                        $scope.modify=2;
+
+
+
+
+                        var jData1 = {};
+                        jData1.ItemTypeID = Editid;
+
+                        if(_language == "en")
+                            jData1.Lang = "en-us";
+                        else
+                            jData1.Lang = "ar-om";
+
+                        //jData.password = "admidn";
+                        var boo=$sce.trustAsResourceUrl(root+"/GetSubItems");
+                        $.ajax({
+                            type: "POST",
+                            url: boo,
+                            data: JSON.stringify(jData1),
+                            contentType: "application/x-www-form-urlencoded",
+                            dataType: "json",
+                            crossDomain: true,
+                            success: function (msg) {
+                                // $scope.$apply(function(){
+
+                                var b=JSON.parse(msg);
+                                $scope.itemname1=b;
+                                //$scope.itemname2=b.Unit;
+                                //setTimeout(function(){
+                                setTimeout(function(){
+                                    $("#Itemname").prop('disabled', false);
+                                    $('#Itemname').val(gridarray[i].SubItem);
+                                    angular.element('#clicko').trigger('click');
+                                }, 300);
+                                //},400);
+                                console.log(b);
+                                //spinhide();
+
+                                //});
+                            }
+                        });
+                        /* $('#unit').val(gridarray[i].Unit);
+                               $('#price').val(gridarray[i].Price);
+                               $('#quantity').val(gridarray[i].Quantity);
+                               $("#quantity").prop('disabled', false);
+                               $('#total').val(gridarray[i].Total);*/
+
+                        var jData21 = {};
+
+                        if(_language == "en")
+                            jData21.Lang = "en-us";
+                        else
+                            jData21.Lang = "ar-om";
+
+                        var loo=$sce.trustAsResourceUrl(root+"/GetItemType");
+                        $.ajax({
+                            type: "POST",
+                            url: loo,
+                            data: JSON.stringify(jData21),
+                            contentType: "application/x-www-form-urlencoded",
+                            dataType: "json",
+                            crossDomain: true,
+                            success: function (msg) {
+
+                                // $scope.$apply(function(){
+                                var add1=JSON.parse(msg);
+                                $scope.item1=add1;
+                                //$scope.eventtype1=l.EventType;
+                                setTimeout(function(){
+                                    $('#itemtype').val(Editid);
+                                    angular.element('#clicko').trigger('click');
+                                },300);
+
+                                console.log(add1);
+                                spinhide();
+
+                                //});
+                            }
+
+                        });
+
+
+
+
+
+                        //$('#Itemname').val(gridarray[i].SubItem);
+                        //
+
+                        //angular.element('#clicko').trigger('click');
+
+
+                        $('#unit').val(gridarray[i].Unit);
+                        $('#price').val(gridarray[i].Price);
+                        $('#quantity').val(gridarray[i].Quantity);
+                        $('#total').val(gridarray[i].Total);
+
+                    }
+                }
+
+            }
+            /*===============================//GRID Row EDIT===========================*/
+
+
+            /*===============================GRID Row Delete===========================*/
+            $scope.deleterow=function(delid)
+            {
+                /*alert(delid);
+                    if(delid==6)
+                    {
+                    //$("#qahwa").prop('checked', false);
+                    $("#qahwa").click();
+                    //$('#qahwa').attr('checked', false);
+                    //document.getElementById('qahwa').checked=false;
+                    //alert()
+                    //angular.element('#clicko').trigger('click');
+                    //$scope.qahwa=false;
+                    }
+                    else if(delid==7)
+                    {
+                    //$('#Photography').click();
+                    angular.element('#Photography').trigger('click');
+                    }
+                    else if(delid==8)
+                    {
+                    //$('#Video').click();
+                    angular.element('#Video').trigger('click');
+                    }*/
+                /*else
+                {*/
+                for(var i=0;i<gridarray.length;i++){    //deleting items
+                    if(gridarray[i].ItemID == delid)
+                    {
+                        gridarray.splice(i,1);
+                    }
+                }
+                //}
+                console.log(gridarray);
+                $scope.gridarr=gridarray;
+                gridshohid();
+                gridstotal();
+            }
+            /*===============================////GRID Row Delete===========================*/
+
+
+            setTimeout(function(){
+                $scope.gridarr=gridarray;
+                angular.element('#clicko').trigger('click');          //datagrid
+                $('#example').dataTable( {
+                    "autoWidth": false
+                } );
+                //alert(gridarray.length);
+
+            }, 300);
+
+            /*===============================Grid HIDE/SHOW===========================*/
+            function gridshohid()
+            {
+                if(gridarray.length>0)
+                {
+                    $(".grid").show();
+                    $("#submitbtn").prop('disabled', false);
+                }
+                else
+                {
+                    $(".grid").hide();
+                    $("#submitbtn").prop('disabled', true);
+                }
+            }
+            /*===============================///Grid HIDE/SHOW===========================*/
+
+            /*===============================Grid Total Function===========================*/
+            function gridstotal()
+            {
+                var gridtotal="";
+                //var officecost=$rootScope.officecost;
+
+                if($rootScope.officecost != null)
+                {
+                    var officecost=$rootScope.officecost;
+                }
+                else
+                {
+                    var officecost=0;
+                }
+
+
+                if($scope.Waiters != null)
+                {
+                    var waitercos=$scope.Waiters*$rootScope.waitcost;
+                }
+                else
+                {
+                    var waitercos=0;
+                }
+
+                for(var i=0;i<gridarray.length;i++){
+                    gridtotal=Number(gridtotal)+Number(gridarray[i].Total);
+                }
+                //console.log(gridtotal);
+                //alert(gridtotal);
+                var Total= Number(gridtotal)+Number(officecost)+Number(waitercos);
+                //console.log(Total);
+                $scope.itemcost=gridtotal;
+                $scope.officefees=officecost;
+                $scope.waitercost=waitercos;
+                $scope.totaltopay=Total;
+                $rootScope.tot=Total;
+
+            }
+
+            /*===============================///Grid Total Function===========================*/
+
+            $("#totalbutt").click(function()
+            {
+                $("#costtable").toggle();
+            });
+
+        });
+
+
+        LemonApp.controller('ContactUsController', function($scope, $http, $state, $rootScope, $window, $sce) {
+
+
+
+
+            var logincheck=localStorage.getItem("LoggedIn");
+            //alert(logincheck);
+            if(logincheck=="" || logincheck==null)
+            {
+                //location.href="#book";
+                //alert("loggedout");
+                $(".loghide").show();
+                $(".user1hide").show();
+                $(".userhide").hide();
+                $(".outhide").hide();
+                $(".dashhide").hide();
+                $(".profhide").hide();
+            }
+            else if(logincheck==1)
+            {
+                $(".userhide").show();
+                $(".outhide").show();
+                $(".dashhide").show();
+                $(".profhide").show();
+                $(".loghide").hide();
+                $(".user1hide").hide();
+                $scope.username=localStorage.getItem("Name").toUpperCase();
+                $scope.number=localStorage.getItem("Mobile");
+
+                /*=========================Autofill fot Logeed in ajax=================================*/
+
+                var jData = {};
+                jData.mobile = localStorage.getItem("Mobile");
+                //console.log(mobno);
+                spinshow();
+                var boo=$sce.trustAsResourceUrl(root+"/FetchDetailsBymob");
+                $.ajax({
+                    type: "POST",
+                    url: boo,
+                    data: JSON.stringify(jData),
+                    contentType: "application/x-www-form-urlencoded",
+                    dataType: "json",
+                    crossDomain: true,
+                    success: function (msg) {
+                        // $scope.$apply(function(){
+                        //setTimeout(function(){
+                        A=JSON.parse(msg);
+                        console.log(A);
+                        if(A.Value==1)
+                        {
+                            //alert("got in");
+                            $scope.name=A.FirstName;
+                            //$scope.lname=A.LastName;
+                            $scope.email=A.Email;
+                            //$scope.email="vavavavavakutty@gmail.commme";
+                            $scope.mobile=parseInt(localStorage.getItem("Mobile"));
+                            angular.element('#clicko').trigger('click');
+                        }
+                        else if(A.Value==0)
+                        {
+                            //alert("sorry contact admin");
+                            //specialalert("alert-2","sorry contact admin",3000);
+                        }
+                        spinhide();
+
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        //alert(textStatus);
+                        //specialalert("alert-2",textStatus,3000);
+                        spinhide();
+                    }
+                });
+
+                /*=========================///Autofill fot Logeed in ajax=================================*/
+
+            }
+
+
+
+            $(function() {
+                // Setup form validation on the #register-form element
+                $("#register-form").validate({
+                    // Specify the validation rules
+                    rules: {
+                        Uname: {
+                            required: true,
+                            minlength: 2
+                        },
+                        mobno: {
+                            required: true,
+                            minlength: 8,
+                            maxlength: 10,
+                            number: true
+                        },
+                        email: {
+                            required: true,
+                            email: true
+                        },
+                        txtarea: {
+                            required: true,
+                            minlength: 2,
+                            maxlength: 100
+                        },
+                        TimeFrame: {
+                            required: true
+                        },
+                        agree: "required"
+                    },
+
+                    // Specify the validation error messages
+                    messages: {
+                        Uname: {
+                            required: "please enter your name",
+                            minlength: "minimun length is 2"
+                        },
+                        mobno: {
+                            required: "Mobile number required",
+                            minlength: "Minimun length is 8",
+                            maxlength: "Maximum length is 10",
+                            number: "Numbers only"
+                        },
+                        email: {
+                            required: "Email Required",
+                            email: "Please enter a valid email ID"
+                        },
+                        txtarea: {
+                            required: "Your message please",
+                            minlength: "Minimun length is 2",
+                            maxlength: "Maximum length is 100",
+                        },
+                        TimeFrame: {
+                            required: "please make a selection"
+                        },
+                        agree: "Please accept our policy"
+                    },
+
+                    submitHandler: function(form) {
+                        //form.submit();
+                        contactbutton();
+                    }
+                });
+                //});
+
+            });
+
+
+            function contactbutton()                           //$scope.contactbutton=function()
+            {
+                spinshow();
+                //alert("keri tto");
+                var jData = {};
+                jData.Name= $scope.name;
+                jData.Email = $scope.email;
+                jData.Mobile = $scope.mobile;
+                jData.Query = $scope.query;
+                //jData.password = "admidn";
+                var koo=$sce.trustAsResourceUrl(root+"/SaveContact");
+                $.ajax({
+                    type: "POST",
+                    url: koo,
+                    data: JSON.stringify(jData),
+                    contentType: "application/x-www-form-urlencoded",
+                    dataType: "json",
+                    crossDomain: true,
+                    success: function (msg) {
+                        //var l=JSON.parse(msg);
+                        console.log("Start");
+                        console.log(msg);
+                        console.log("End");
+                        spinhide();
+                        location.href="#Home";
+                        specialalert("alert-1","Your Enquiry has been sent",3000);
+
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        //alert(textStatus);
+                        specialalert("alert-2",textStatus,3000);
+                        spinhide();
+                    }
+                });
+            }
+
+        });
+
+
+
+
+
+</script>
+
+
+
+</html>

@@ -1,0 +1,633 @@
+﻿<!DOCTYPE html>
+<html data-ng-app="LemonApp">
+<meta charset="UTF-8">
+
+
+<style>
+.label {
+  width:100px;
+  text-align:right;
+  float:left;
+  padding-right:10px;
+  font-weight:bold;
+}
+#register-form label.error {
+  color:#FB3A3A;
+  font-weight:bold;
+}
+#add-item label.error {
+  color:#FB3A3A;
+  font-weight:bold;
+}
+
+h1 {
+  font-family: Helvetica;
+  font-weight: 100;
+  color:#333;
+  padding-bottom:20px;
+}
+.formbox{
+width: 100%;
+    background-color: #e7ebec;
+    padding: 10px 5px;
+    border: 0;
+    border-radius: 5px;
+    color: black;
+	font-size: 18px;
+}
+.homelogin{
+display:none;
+margin-top:15%;
+}
+.homelogintitle{
+text-align:center;
+color:green;
+}
+.homelogin-input1{
+background-color: #e7ebec;
+padding: 10px 5px;
+border: 0;
+border-radius: 5px;
+color: black;
+font-size: 15px;
+text-align:center;
+width:100% important;
+margin-bottom:4px;
+}
+.homelogin-input2{
+border:1px solid green;
+border-radius:3px;
+text-align:center;
+width:100%;
+vertical-align:middle;
+margin-bottom:4px;
+
+}
+.selht
+{
+height:46px !important;
+}
+
+.labl{
+color:black;
+}
+.labl-add{
+color:green;
+margin-top:3px;
+}
+
+.headmain
+{
+text-align:center;
+margin-bottom:20px;
+background-color:#006400;
+color:#FAF172 !important;
+margin-left:-4%;
+margin-right:-4%;
+padding:10px 0px;
+}
+
+
+
+</style> 
+
+
+<div>
+    <nav class="navbar navbarclass">
+        <div align="center" style="float:left;"><a href="#Home"><img src="images/left-yellow.png" style="width:50px;margin:5px;position:absolute;" /></a></div>
+        <div align="center" class="navbartext"><a href="#" translate="BOOK">Book An Event</a></div>
+    </nav>
+    <span id="showLeftPush" style="top:0;right:0;position:fixed;"><img src="images/Menu.png" alt=""></span>
+</div>
+ 
+   <!--//Navbar top-->
+   
+ <body class="cbp-spmenu-push">
+    <div class="overlay"></div>   
+         <!----------------------menu side------------------------------>
+			<nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
+			<!-- <h3>Menu</h3> -->
+				<!-- <a href="#home">Home</a>
+				<a href="#about">Contact</a>
+				<a href="#service">Services</a>
+				<a href="#test">Testimonials</a>
+				<a href="#gallery">Gallery</a>
+				<a href="#contact">Logout</a> -->
+				
+				
+				<!-- <div class="loghide"><a href="#myModal" ng-click="closmenu();">LOGIN</a></div> -->
+				<!-- <div class="userhide" style="background-color:black;padding:10px 0px 10px 0px;"><a><font size="4" color="white">Welcome: {{username}}</font></a></div>
+				<a href="#Home" ng-click="closmenu();">Home</a>
+				<div class="dashhide"><a href="#Dashboard" ng-click="closmenu();">Dashboard</a></div>
+				<a href="#Hospitality" ng-click="closmenu();">Hospitality</a>
+				<a href="#Technology" ng-click="closmenu();">Technology</a>
+				<a href="#PublicRelations" ng-click="closmenu();">PublicRelations</a>
+				<div class="outhide"><a href="#" ng-click="logout();">Logout</a></div> -->
+				
+				
+				
+				<a style="border-bottom:1px solid;text-align:center;background-color:#27AF54;"><div style="padding-top:20px"><font size="5" color="white" translate="WELCOME">WELCOME</font></div>
+				<div class="user1hide"><br><font size="4" color="white" translate="GUEST">GUEST</font></div>
+				<div class="userhide"><br><font size="4" color="white">{{username}} <br>{{number}}</font></div></a>
+				
+				<div><a style="border-bottom:1px solid;" href="#Home" ng-click="closmenu();"><font class="menu-list" translate="HOME">Home</font><span class="glyphicon glyphicon-home menu-let-color"></span></a></div>
+				<!-- <div class="loghide"><a style="border-bottom:1px solid;" href="#myModal" ng-click="loginbtnactiv();"><font class="menu-list" translate="LOGIN">Login</font><span class="glyphicon glyphicon-log-in menu-let-color"></span></a></div> -->
+				<div class="dashhide"><a style="border-bottom:1px solid;" href="#Dashboard" ng-click="closmenu();"><font class="menu-list" translate="DASHBOARD">Dashboard</font><span class="glyphicon glyphicon-th-list menu-let-color"></span></a></div>
+				<div class="profhide"><a style="border-bottom:1px solid;" href="#Profile" ng-click="closmenu();"><font class="menu-list" translate="PROFILE">Profile</font><span class="glyphicon glyphicon-user menu-let-color"></span></a></div>
+				
+				<div><a style="border-bottom:1px solid;" href="#Gallery" ng-click="closmenu();"><font class="menu-list" translate="GALLERY">Gallery</font><span class="glyphicon glyphicon-th-large menu-let-color"></span></a></div>
+				<div><a style="border-bottom:1px solid;" href="#Technology" ng-click="closmenu();"><font class="menu-list" translate="TECHNOLOGY">Technology</font><span class="glyphicon glyphicon-phone menu-let-color"></span></a></div>
+				<div><a style="border-bottom:1px solid;" href="#PublicRelations" ng-click="closmenu();"><font class="menu-list" translate="PUBLICRELATION">Public Relations</font><span class="glyphicon glyphicon-hand-left menu-let-color"></span></a></div>
+			    <div><a style="border-bottom:1px solid;" href="#Hospitality" ng-click="closmenu();"><font class="menu-list" translate="HOSPITALITY">Hospitality</font><span class="glyphicon glyphicon-cutlery menu-let-color"></span></a></div>
+				
+				<div class="outhide"><a style="border-bottom:1px solid;" ng-click="logout();"><font class="menu-list" translate="LOGOUT">Logout</font><span class="glyphicon glyphicon-log-out menu-let-color"></span></a></div>
+		  </nav>
+	     
+		<!------------------------//menu side------------------------>
+		
+	
+		<!--========================BOOK EVENT FORM=============================-->
+  <input type="hidden"  ng-model="eventidentifier" id="eventidentifier"><!-- item ID -->
+    <input type="hidden" value="{{Eid}}" ng-model="Eid" id="Eid"><!-- modify -->
+  
+  
+     <div class="about-section" id="about" style="background-color:#ededed;width:100%;margin:0px;padding-bottom:110px;">
+	    <div class="container">
+	       <div class="white-bg">
+				<h4 class="sub-tittle" translate="CUSTOMER">CUSTOMER DETAILS</h4>
+				<button id="clicko" ng-click="clickoo();" style="display:none;"></button>
+
+            <form id="register-form" novalidate="novalidate" class="additemdiv">
+                <div class="form-div">
+                    <label class="form-label dynamictext" translate="MOBILE">Mobile number:</label>
+                    <input type="number" ng-model="mobile" id="mobile" name="Mobno"
+                           class="form-control form-textbox input-lg additemtext" ng-keyup="mobilecheck(mobile);">
+                </div>
+
+                <div class="form-div">
+                    <label class="form-label dynamictext" translate="NAME">Name: </label>
+                    <input type="text" ng-model="fname" id="fname" name="Fname"
+                           class="form-control form-textbox input-lg additemtext">
+                </div>
+
+                <div class="form-div">
+                    <label class="form-label dynamictext" translate="EMAIL">Email: </label>
+                    <input type="email" ng-model="email" id="email" name="Email"
+                           class="form-control form-textbox input-lg additemtext">
+                </div>
+
+                <div class="form-div" style="display:none;" id="pass1">
+                    <label class="form-label dynamictext" translate="PASSWORD">Password: </label>
+                    <input type="password" ng-model="password" name="Password"
+                           class="form-control form-textbox input-lg additemtext">
+                </div>
+
+                <div class="form-div">
+                </div>
+
+                <h4 class="sub-tittle" translate="LOCATION">LOCATION DETAILS</h4>
+
+                <div class="form-div">
+                    <label class="form-label dynamictext" translate="LOCATION-NAME">Location Name: </label>
+                    <select name="Locationname" id="Locationname" title="Select a Time Frame"
+                            class="form-control form-textbox input-lg selht additemselect">
+                        <option value="" translate="SELECT">-Select-</option>
+                        <option data-ng-repeat="x in location1 track by $index" value="{{x.ID}}">{{x.LocationName}}</option>
+                    </select>
+                </div>
+
+                <div class="form-div">
+                    <label class="form-label dynamictext" translate="LANDMARK">Landmark: </label>
+                    <input type="text" ng-model="landmark" id="landmark" name="Landmark"
+                           class="form-control form-textbox input-lg additemtext">
+                </div>
+
+                <div class="form-div">
+                </div>
+
+                <h4 class="sub-tittle" translate="EVENTS">EVENT DETAILS</h4>
+
+                <div class="form-div">
+                    <label class="form-label dynamictext" translate="EVENT-TYPE">Event Type: </label>
+                    <select name="Eventtype" id="Eventtype" title="Select a Time Frame"
+                            ng-model="Eventtype" ng-change="eventselect(Eventtype);" class="form-control selht form-textbox input-lg additemselect">
+                        <option value="" translate="SELECT">-Select-</option>
+                        <option data-ng-repeat="y in eventtype1 track by $index" value="{{y.ID}}">{{y.EventType}}</option>
+                    </select>
+                </div>
+
+                <div class="form-div row" style="direction:rtl">
+                    <div class="col-md-6">
+                        <label class="form-label dynamictext" translate="EVENT-DATE">Event Date: </label>
+                        <input type="date" ng-model="eventdate" id="eventdate" value="2013-01-08"
+                               class="form-control form-textbox input-lg selht additemtext">
+                    </div>
+                    <div class="col-md-6 ">
+                        <div style="display:none;float:right;" id="etime1">
+                            <label class="form-label dynamictext" translate="EVENT-TIME">Event Time:</label>
+                            <input type="time" id="Eventtime" ng-model="Eventtime" name="Time"
+                                   class="form-control form-textbox input-lg selht additemtext">
+                        </div>
+                        <div style="display:none;float:right;" id="etime2">
+                            <label class="form-label dynamictext" translate="EVENT-TIME">Event Time: </label>
+                            <select name="Eventtime" title="Select a Time Frame" ng-model="Eventtime" name="Time"
+                                    class="form-textbox form-control input-lg selht additemselect">
+                                <option value="" translate="SELECT">-Select-</option>
+                                <option data-ng-repeat="y in eventtym track by $index" value="{{y.TimingNames}}">{{y.TimingNames}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-div">
+                    <label class="form-label dynamictext" translate="WAITERS">Waiters:</label>
+                    <input type="text" id="Waiters" ng-model="Waiters" ng-keyup="waiterupdate();" name="Waitersno"
+                           class="form-control form-textbox input-lg additemtext">
+                </div>
+
+                <div class="form-div">
+                    <label class="form-label dynamictext" translate="GUESTS">Guests:</label>
+                    <input type="number" ng-model="Guests" id="Guests" name="Guestno"
+                           class="form-control form-textbox input-lg additemtext">
+                </div>
+
+                <div class="form-div">
+                    <label class="form-label dynamictext" translate="DURATION">Duration:</label>
+					<!--<div class="row">
+						<div class="col-md-3">
+							<input type="text" value="1" ng-model="Duration" name="Duration"
+							class="form-control form-textbox input-lg"  readonly>
+						</div>
+						<div class="col-md-3"></div>
+						<div class="col-md-6">
+							<select name="Timeframe" title="Select a Time Frame" class="form-control formbox input-lg selht" style="width:70%;height:34px;float:right;" disabled>
+							<option value="">-Select-</option>
+							<option value="days" selected translate="DAY">Day</option>
+							</select>
+						</div>
+					</div>-->
+                    <select name="Timeframe" title="Select a Time Frame" class="form-control form-textbox input-lg selht" disabled>
+                        <option value="">-Select-</option>
+                        <option value="days" selected translate="DAY">Day</option>
+                    </select>
+                </div>
+                <div class="form-div">
+                    <label class="form-label dynamictext" translate="REMARKS">Remarks: </label>
+                    <textarea ng-model="remarks" id="remarks" rows="4" cols="50"
+                              class="form-control form-textbox input-lg additemtext"></textarea>
+                </div>
+
+                <div class="form-div">
+                </div>
+                <!------------------------ON TICK ELEMENTS------------------------>
+                <!-- <br><br><br><input type="checkbox" name="addi" id="qahwa" ng-model="qahwa" ng-change="qahwatick(qahwa);" >Qahwa
+        <br><br><input type="checkbox" name="addi" id="Video" ng-model="Video" ng-change="videotick(Video);" >Video
+        <br><br><input type="checkbox" name="addi" id="Photography" ng-model="Photography" ng-change="phototick(Photography);">Photography -->
+                <!------------------------//ON TICK ELEMENTS------------------------>
+                <!-- <select name="TimeFrame" title="Select a Time Frame">
+        <option value="">-Select-</option>
+        <option value="1">Less than 3 months</option>
+        <option value="2">3-6 months</option>
+        <option value="3">6-9 months</option>
+        <option value="4">9-12 months</option>
+        <option value="5">Over 12 months</option>
+        </select> -->
+                <!------------------------ITEMS TABLE------------------------>
+
+                <div class="grid " style="display:none;">
+                    <h4 class="sub-tittle" translate="I-ITEM">ITEM DETAILS</h4>
+                    <div class="form-div">
+                        <table class="table table-bordered table-striped example compact dyanamictable" border="1"
+                               style="border:1px solid;width:100%;" cellspacing="0">
+                            <thead>
+                                <tr class="success">
+                                    <th translate="I-ITEM-NAME" class="dynamictableth">Item</th>
+                                    <!-- <th>Category</th>
+                            <th>Size</th>
+                            <th>Unit</th>
+                            <th>Price</th> -->
+                                    <th translate="I-QUANTITY" class="dynamictableth">Quantity</th>
+                                    <th translate="I-TOTAL" class="dynamictableth">Total</th>
+                                    <th colspan="2"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr data-ng-repeat="y in gridarr track by $index">
+                                    <td>{{y.ItemType}} {{y.SubItemName}}</td>
+                                    <!-- <td>{{y.Category}}</td>
+        <td>{{y.Size}}</td>
+        <td>{{y.Unit}}</td>
+        <td>{{y.Price}}</td> -->
+                                    <td>{{y.Quantity}}</td>
+                                    <td>{{y.Total}}</td>
+                                    <td colspan="2">
+                                        <button type="button" class="btn btn-default" aria-label="Left Align" ng-model="y.ItemID" ng-click="Editrow(y.ItemID);">
+                                            <span class="glyphicon glyphicon-edit"></span>
+                                        </button>
+                                        <button type="button" class="btn btn-default" aria-label="Left Align" ng-model="y.ItemID" ng-click="deleterow(y.ItemID);">
+                                            <span class="glyphicon glyphicon-remove"></span>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!------------------------//ITEMS TABLE------------------------>
+                <!------------------------COST TABLE------------------------>
+                <!-- <div align="right" style="margin-top:1%;margin-right:10%;">
+        <button id="totalbutt"><b>Total </b></button><span>: {{totaltopay}}&nbsp&nbsp</span>
+        <table border="1" id="costtable" style="display:none;">
+        <tbody>
+        <tr><td>Item Cost : <span ng-model="itemcost">{{itemcost}}&nbsp&nbsp</span></td></tr>
+         <tr><td>OfficeFees : <span ng-model="officefees">{{officefees}}&nbsp&nbsp</span></td></tr>
+        <tr><td>Waiter Cost : <span ng-model="waitercost">{{waitercost}}&nbsp&nbsp</span></td></tr>
+         <tr><td><b>Total : </b><span ng-model="totaltopay">{{totaltopay}}&nbsp&nbsp</span></td></tr>
+        </tbody>
+        </table>
+        </div> -->
+                <!------------------------//COST TABLE------------------------>
+                <h4 class="sub-tittle" translate="COST">COST DETAILS</h4>
+                <div class="form-div">
+                    <table class="table table-reflow table-bordered dyanamictable" style="font-size:18px;">
+                        <tbody>
+                            <tr class="success"><td translate="ITEM-COST">Item Cost : </td><td><span ng-model="itemcost">{{itemcost}}.000 </span>OMR</td></tr>
+                            <tr class="success"><td translate="OFFICE-FEES">OfficeFees :</td><td><span ng-model="officefees">{{officefees}}.000 </span>OMR</td></tr>
+                            <tr class="success"><td translate="WAITER-COST">Waiter Cost :</td><td> <span ng-model="waitercost">{{waitercost}}.000 </span>OMR</td></tr>
+                            <tr class="success"><b><td translate="TOTAL-COST">Total :</td><td> <span ng-model="totaltopay">{{totaltopay}}.000 </span>OMR</td></b></tr>
+                            <!-- <tr><td colspan="2"></td></tr> -->
+                        </tbody>
+                    </table>
+                </div>
+                <input type="submit" name="submit" value="{{'SUBMIT' | translate}}" id="submitbtn"
+                       class="btn btn-success btn-lg" style="clear:left;float:right;" disabled="true">  <!-- ng-click="contactbutton();" -->
+                <!-- <button id="submi">Submit</button> -->
+            </form>
+				 <button data-toggle="modal" data-target="#additem" class="btn btn-success btn-lg" ng-click="addclick(1,1);" style="float:left;" translate="ADD-ITEM-BUT">Add Item</button>
+				 
+				 <div class="bookevent-padding">
+				 </div>
+			<!--========================//// BOOK EVENT FORM=============================-->	   
+		 
+<!-- =================ADD Item Popup================ -->
+
+ <div id="additem" class="modal fade homelogin" role="dialog" >
+  <div class="modal-dialog">
+
+    
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title homelogintitle" translate="ADD-ITEM">ADD ITEMS</h4>
+      </div>
+	  
+        <form id="add-item" novalidate="novalidate">
+            <!--  -->
+            <div class="modal-body" align="center">
+                <div style="margin:10px;" class="additemdiv">
+                    <div class="additemdiv2" style="width:40%;">
+                        <label for="Itemtype" class="labl-add" translate="ITEM-TYPE">Item Type: </label>
+                    </div>
+                    <div class="additemdiv2" style="width:60%;">
+                        <select name="Itemtype" ng-model="Itemtype" id="itemtype"
+                                ng-change="itemnamefetch(Itemtype);" class="form-control homelogin-input1 additemselect"
+                                style="width:100%;height:30px; padding:0px;">
+                            <option value="" selected translate="SELECT">-Select-</option>
+                            <option data-ng-repeat="a in item1 track by $index" value="{{a.ItemID}}">{{a.ItemName}}</option>
+                        </select>
+                    </div>
+                    <div style="clear:both;"></div>
+                </div>
+
+                <div style="margin:10px;" class="additemdiv">
+                    <div style="width: 40%;" class="additemdiv2">
+                        <label for="Itemname" class="labl-add" translate="SUB-ITEM">Sub Item: </label>
+                    </div>
+                    <div class="additemdiv2" style="width:60%;">
+                        <select name="Itemname" ng-model="Itemname" id="Itemname"
+                                ng-change="unitfetch(Itemname);" class="form-control homelogin-input1 additemselect"
+                                style="width: 100%; height: 30px; padding: 0px;">
+                            <option value="" selected translate="SELECT">-Select-</option>
+                            <option data-ng-repeat="b in itemname1 track by $index" value="{{b.SubItemID}}">{{b.SubItemName}}</option>
+                        </select>
+                    </div>
+                    <div style="clear:both;"></div>
+                </div>
+
+                <div style="margin:10px;" class="additemdiv">
+                    <div style="width: 40%;" class="additemdiv2">
+                        <label for="unit" class="labl-add" translate="UNIT">Unit: </label>
+                    </div>
+                    <div class="additemdiv2" style="width:60%;">
+                        <input type="text" ng-model="unit" id="unit" name="unit"
+                               class="form-control homelogin-input1 additemtext" placeholder="{{'UNIT' | translate}}" style="width: 100%; height: 30px;">
+                    </div>
+                    <div style="clear:both;"></div>
+                </div>
+
+                <div style="margin:10px;" class="additemdiv">
+                    <div style="width: 40%;" class="additemdiv2">
+                        <label for="price" class="labl-add" translate="PRICE">Price:</label>
+                    </div>
+                    <div class="additemdiv2" style="width:60%;">
+                        <input type="text" ng-model="price" id="price" name="price"
+                               class="form-control homelogin-input1 additemtext" placeholder="{{'PRICE' | translate}}"
+                               disabled style="width: 100%; height: 30px; padding: 0px;">  <!-- value="{{price}}" -->
+                    </div>
+                    <div style="clear:both;"></div>
+                </div>
+
+                <div style="margin:10px;" class="additemdiv">
+                    <div style="width: 40%;" class="additemdiv2">
+                        <label for="quantity" class="labl-add" translate="QUANTITY">Quantity: </label>
+                    </div>
+                    <div class="additemdiv2" style="width:60%;">
+                        <input type="number" ng-model="quantity" name="quantity" id="quantity"
+                               ng-keyup="totalfunc(price,quantity);" class="form-control homelogin-input1 additemtext" placeholder="{{'QUANTITY' | translate}}"
+                               disabled style="width: 100%; height: 30px; padding: 0px;">  <!-- value="{{price}}" -->
+                    </div>
+                    <div style="clear:both;"></div>
+                </div>
+
+                <div style="margin:10px;" class="additemdiv">
+                    <div style="width: 40%;" class="additemdiv2">
+                        <label for="total" class="labl-add" translate="ITEM-TOTAL">Total: </label>
+                    </div>
+                    <div class="additemdiv2" style="width:60%;">
+                        <input type="number" ng-model="total" name="total" id="total"
+                               class="form-control homelogin-input1 additemtext" placeholder="{{'ITEM-TOTAL' | translate}}"
+                               disabled style="width: 100%; height: 30px; padding: 0px;"><!-- {{price*quantity}} -->
+                    </div>
+                    <div style="clear:both;"></div>
+                </div>
+
+                <table style="width:100%;" class="dyanamictable">
+                    <tbody>
+                        <input type="hidden" value="{{price1}}" ng-model="price1" id="priceid"><!-- item ID -->
+                        <input type="hidden" value="{{price2}}" ng-model="price2" id="priceid1"><!-- ItemName -->
+                        <input type="hidden" value="{{price3}}" ng-model="price3" id="priceid2"><!-- Subitem Name -->
+                        <input type="hidden" value="{{action}}" ng-model="action" id="action"><!-- Action -->
+                        <input type="hidden" value="{{operation}}" ng-model="operation" id="operation"><!-- Operation -->
+                        <input type="hidden" value="{{modify}}" ng-model="modify" id="modify"><!-- modify -->
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <!--  <div class="row">
+                 <div class="col-md-3 col-sm-3 col-xs-3 col-md-offset-8 col-sm-offset-8 col-xs-offset-8"> -->
+                <div align="center">
+                    <input type="submit" name="submit" value="{{'ADD-ITEM-BUT' | translate}}" class="btn btn-success" />    <!-- ng-click="addoitem(Itemtype,Itemname,price2,price3,unit,price,quantity,total,price1);" -->
+
+
+                </div>
+                <!-- </div> -->
+                <!-- <div class="col-md-3 col-sm-3 col-xs-3 col-md-offset-2 col-sm-offset-2 col-xs-offset-2">
+            <button type="button" class="btn btn-default btn-success" data-dismiss="modal">Cancel</button>
+            </div> -->
+                <!-- </div> -->
+            </div>
+        </form>
+    </div>
+
+  </div>
+</div> 
+<!-- =================////ADD Item Popup================ -->
+
+
+<!-- =================/////Login Div============== -->
+				 
+				<!-- <form action="" method="post" id="register-form" novalidate="novalidate">
+  
+    <div class="label">First Name</div><input type="text" id="firstname" name="firstname" /><br>
+    <div class="label">Last Name</div><input type="text" id="lastname" name="lastname" /><br>
+    <div class="label">Email</div><input type="text" id="email" name="email" /><br>
+    <div class="label">Password</div><input type="password" id="password" name="password" /><br>
+    <div style="margin-left:140px;"><input type="submit" name="submit" value="Submit" /></div>
+    
+  </form> -->
+  
+  
+		 </div>
+				
+		
+	 </div>
+	 </div>
+  
+  
+  
+
+	<!----------------------------footer Nav---------------------------------------->
+			<div class="navfoot" align="center" style="position:fixed;bottom:0;width:100%;">
+		              <img src="images/Lemon_Tech_logo.png" style="width:120px;"/>
+		            </div>
+	<!--------------------------//footer Nav---------------------------------------->
+							
+	
+							
+</body>
+<script>
+   //$(document).ready(function() {
+							 /*$( ".submi" ).on( "click", function(e) {
+								e.preventDefault();      
+								// do something
+							});*/
+							// $("#register-form").unbind('submit').submit();
+								//e.preventDefault();
+								//.unbind().submit();
+							//});
+							
+							 //});	
+  // When the browser is ready...
+  
+ </script>
+  <script>
+						 
+						// You can also use "$(window).load(function() {"
+						$(function () {
+						  // Slideshow 4
+						  $("#slider4").responsiveSlides({
+						auto: true,
+						pager: true,
+						nav:false,
+						speed: 500,
+						namespace: "callbacks",
+						before: function () {
+						  $('.events').append("<li>before event fired.</li>");
+						},
+						after: function () {
+						  $('.events').append("<li>after event fired.</li>");
+						}
+						  });
+
+						});
+						  </script>
+			<!-- 	</div>
+
+
+		 </div> -->
+		<script>
+			var menuLeft = document.getElementById( 'cbp-spmenu-s1' ),
+				showLeftPush = document.getElementById( 'showLeftPush' ),
+				showRightPush = document.getElementById( 'showRightPush' ),
+				body = document.body;
+
+			showLeftPush.onclick = function() {
+				classie.toggle( this, 'active' );
+				classie.toggle( body, 'cbp-spmenu-push-toright' );
+				classie.toggle( menuLeft, 'cbp-spmenu-open' );
+				disableOther( 'showLeftPush' );
+			};
+
+			function disableOther( button ) {
+				if( button !== 'showLeftPush' ) {
+					classie.toggle( showLeftPush, 'disabled' );
+				}
+				if( button !== 'showRightPush' ) {
+					classie.toggle( showRightPush, 'disabled' );
+				}
+			}
+			window.onbeforeunload = function () { return "Your work will be lost."; };
+
+			$(document).ready(function () {
+			    var language = localStorage.getItem("language");
+
+			    if (language == "ar") {
+			        $('.dynamictext').css({ "direction": "rtl", "float": "right" });
+			        $('.dyanamictable').css({ "direction": "rtl" });
+			        $('.dynamictableth').css({ "direction": "rtl", "text-align": "right" });
+			        $('.additemdiv').css({ "direction": "rtl" });
+			        $('.additemdiv2').css({ "float": "right", "text-align": "left", "padding-left": "20px" });
+			        $('.additemtext').css({ "text-align": "right", "padding-right": "10px" });
+			        $('.additemselect').css({ "text-align": "right", "padding-right": "5px" });
+			    }
+			    else {
+			        $('.dynamictext').css({ "direction": "ltr", "float": "left" });
+			        $('.dyanamictable').css({ "direction": "ltr" });
+			        $('.dynamictableth').css({ "direction": "ltr", "text-align": "left" });
+			        $('.additemdiv').css({ "direction": "ltr" });
+			        $('.additemdiv2').css({ "float": "left", "text-align": "right", "padding-right": "20px" });
+			        $('.additemtext').css({ "text-align": "left", "padding-left": "10px" });
+			        $('.additemselect').css({ "text-align": "left", "padding-left": "5px" });
+			    }
+			});
+		</script>
+		
+		<!-- <script type="text/javascript">
+			$(document).ready(function() {
+				
+				var defaults = {
+					containerID: 'toTop', // fading element id
+					containerHoverID: 'toTopHover', // fading element hover id
+					scrollSpeed: 1200,
+					easingType: 'linear' 
+				};
+				
+				
+				$().UItoTop({ easingType: 'easeOutQuart' });
+				
+			});
+		</script> -->
+		
+</html>

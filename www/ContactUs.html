@@ -1,0 +1,250 @@
+﻿<!DOCTYPE html>
+<html data-ng-app="LemonApp">
+<meta charset="UTF-8">
+
+
+<style>
+html, body {
+    height:100%;
+} 
+body 
+    {
+        
+        background-image: url("images/background.png");
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+       
+    }
+.label {
+  width:100px;
+  text-align:right;
+  float:left;
+  padding-right:10px;
+  font-weight:bold;
+}
+#register-form label.error {
+  color:#FB3A3A;
+  font-weight:bold;
+}
+h1 {
+  font-family: Helvetica;
+  font-weight: 100;
+  color:#333;
+  padding-bottom:20px;
+}
+.formbox{
+width: 100%;
+    background-color: #e7ebec;
+    padding: 10px 5px;
+    border: 0;
+    border-radius: 5px;
+    color: black;
+	font-size: 18px;
+}
+</style> 
+
+
+ <div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12 navclas">
+				<nav class="navbar navbarclass">
+				<div style="float:left;"><a href="#Home"><img src="images/left-yellow.png" style="width:50px;margin:5px;position:absolute;"/></a></div>
+				<div align="center" class="navbartext"><a href="" translate="CONTACT">Contact Us</a></div>
+				</nav>
+				<span id="showLeftPush" style="top:0;right:0;position:fixed;"><img src="images/Menu.png" alt=""></span>
+		   </div>
+  </div>
+   <!--//Navbar top-->
+   
+ <body class="cbp-spmenu-push">
+    <div class="overlay" ng-click="overclk();"></div>  
+         <!----------------------menu side------------------------------>
+			<nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
+			<!-- <h3>Menu</h3> -->
+				<!-- <a href="#home">Home</a>
+				<a href="#about">Contact</a>
+				<a href="#service">Services</a>
+				<a href="#test">Testimonials</a>
+				<a href="#gallery">Gallery</a>
+				<a href="#contact">Logout</a> -->
+				
+				
+				<!-- <div class="loghide"><a href="#myModal" ng-click="closmenu();">LOGIN</a></div> -->
+				<!-- <div class="userhide" style="background-color:black;padding:10px 0px 10px 0px;"><a><font size="4" color="white">Welcome: {{username}}</font></a></div>
+				<a href="#Home" ng-click="closmenu();">Home</a>
+				<div class="dashhide"><a href="#Dashboard" ng-click="closmenu();">Dashboard</a></div>
+				<a href="#Hospitality" ng-click="closmenu();">Hospitality</a>
+				<a href="#Technology" ng-click="closmenu();">Technology</a>
+				<a href="#PublicRelations" ng-click="closmenu();">PublicRelations</a>
+				<div class="outhide"><a href="#" ng-click="logout();">Logout</a></div> -->
+				
+				<a style="border-bottom:1px solid;text-align:center;background-color:#27AF54;"><div style="padding-top:20px"><font size="5" color="white" translate="WELCOME">WELCOME</font></div>
+				<div class="user1hide"><br><font size="4" color="white" translate="GUEST">GUEST</font></div>
+				<div class="userhide"><br><font size="4" color="white">{{username}} <br>{{number}}</font></div></a>
+				
+				<div><a style="border-bottom:1px solid;" href="#Home" ng-click="closmenu();"><font class="menu-list" translate="HOME">Home</font><span class="glyphicon glyphicon-home menu-let-color"></span></a></div>
+				<!-- <div class="loghide"><a style="border-bottom:1px solid;" href="#myModal" ng-click="loginbtnactiv();"><font class="menu-list" translate="LOGIN">Login</font><span class="glyphicon glyphicon-log-in menu-let-color"></span></a></div> -->
+				<div class="dashhide"><a style="border-bottom:1px solid;" href="#Dashboard" ng-click="closmenu();"><font class="menu-list" translate="DASHBOARD">Dashboard</font><span class="glyphicon glyphicon-th-list menu-let-color"></span></a></div>
+				<div class="profhide"><a style="border-bottom:1px solid;" href="#Profile" ng-click="closmenu();"><font class="menu-list" translate="PROFILE">Profile</font><span class="glyphicon glyphicon-user menu-let-color"></span></a></div>
+				
+				<div><a style="border-bottom:1px solid;" href="#Gallery" ng-click="closmenu();"><font class="menu-list" translate="GALLERY">Gallery</font><span class="glyphicon glyphicon-th-large menu-let-color"></span></a></div>
+				<div><a style="border-bottom:1px solid;" href="#Technology" ng-click="closmenu();"><font class="menu-list" translate="TECHNOLOGY">Technology</font><span class="glyphicon glyphicon-phone menu-let-color"></span></a></div>
+				<div><a style="border-bottom:1px solid;" href="#PublicRelations" ng-click="closmenu();"><font class="menu-list" translate="PUBLICRELATION">Public Relations</font><span class="glyphicon glyphicon-hand-left menu-let-color"></span></a></div>
+			    <div><a style="border-bottom:1px solid;" href="#Hospitality" ng-click="closmenu();"><font class="menu-list" translate="HOSPITALITY">Hospitality</font><span class="glyphicon glyphicon-cutlery menu-let-color"></span></a></div>
+				
+				<div class="outhide"><a style="border-bottom:1px solid;" ng-click="logout();"><font class="menu-list" translate="LOGOUT">Logout</font><span class="glyphicon glyphicon-log-out menu-let-color"></span></a></div>
+		  
+		  </nav>
+	     
+		<!------------------------//menu side------------------------>
+		
+	
+  <!--start-Profile-->
+     <div class="about-section" id="about" style="background-color:#ededed;width:100%;margin:0px;padding-bottom:110px;position:absolute;height:100%;">
+	    <div class="container">
+	       <div class="about-top top1">
+				 <!-- <h3 class="tittle" style="text-align:center;margin-bottom:20px;">CONTACT US</h3> -->
+				 <button id="clicko" ng-click="clickoo();" style="display:none;"></button>
+				 <div style="" >
+				 <form id="register-form" novalidate="novalidate"> <!--  -->
+                 <label style="font-size:16.5px;" translate="NAME" class="dynamictext">Name: </label><input type="text" ng-model="name" class="form-control formbox input-lg"  style="width:100%;" name="Uname">		   
+				 <br><label style="font-size:16.5px;" translate="MOBILE" class="dynamictext">Mobile number:</label> <input type="number" ng-model="mobile" class="form-control formbox input-lg"  maxlength="8" style="width:100%;" name="mobno">
+				 <br><label style="font-size:16.5px;" translate="EMAIL" class="dynamictext">Email: </label><input type="email" ng-model="email" class="form-control formbox input-lg"  style="width:100%;" name="email">
+				 <br><label style="font-size:16.5px;" translate="QUERY" class="dynamictext">Message: </label><textarea ng-model="query" rows="4" cols="50"  class="form-control formbox input-lg" style="width:100%;" name="txtarea"></textarea>
+				 <!-- <select name="TimeFrame" title="Select a Time Frame">
+				<option value="">-Select-</option>
+				<option value="1">Less than 3 months</option>
+				<option value="2">3-6 months</option>
+				<option value="3">6-9 months</option>
+				<option value="4">9-12 months</option>
+				<option value="5">Over 12 months</option>
+				</select> -->
+				 <br>
+                 <div class="dynamictext">
+                     <input type="submit" name="submit" value="{{'SUBMIT' | translate}}" class="btn btn-default btn-success"
+                            style="margin-bottom:50px;" />
+                 </div>
+                       <!-- ng-click="contactbutton();" -->
+				 <!-- <button id="submi">Submit</button> -->
+				 </form>
+				 </div>	
+				 
+				<!-- <form action="" method="post" id="register-form" novalidate="novalidate">
+  
+    <div class="label">First Name</div><input type="text" id="firstname" name="firstname" /><br>
+    <div class="label">Last Name</div><input type="text" id="lastname" name="lastname" /><br>
+    <div class="label">Email</div><input type="text" id="email" name="email" /><br>
+    <div class="label">Password</div><input type="password" id="password" name="password" /><br>
+    <div style="margin-left:140px;"><input type="submit" name="submit" value="Submit" /></div>
+    
+  </form> -->
+		 </div>
+				
+		
+	 </div>
+	 </div>
+  
+  
+  
+
+	<!----------------------------footer Nav---------------------------------------->
+			<div class="navfoot" align="center" style="position:fixed;bottom:0;width:100%;">
+		              <img src="images/Lemon_Tech_logo.png" style="width:120px;"/>
+		            </div>
+	<!--------------------------//footer Nav---------------------------------------->
+							
+	
+							
+</body>
+<script>
+   //$(document).ready(function() {
+							 /*$( ".submi" ).on( "click", function(e) {
+								e.preventDefault();      
+								// do something
+							});*/
+							// $("#register-form").unbind('submit').submit();
+								//e.preventDefault();
+								//.unbind().submit();
+							//});
+							
+							 //});	
+  // When the browser is ready...
+  
+ </script>
+  <script>
+						 
+						// You can also use "$(window).load(function() {"
+						$(function () {
+						  // Slideshow 4
+						  $("#slider4").responsiveSlides({
+						auto: true,
+						pager: true,
+						nav:false,
+						speed: 500,
+						namespace: "callbacks",
+						before: function () {
+						  $('.events').append("<li>before event fired.</li>");
+						},
+						after: function () {
+						  $('.events').append("<li>after event fired.</li>");
+						}
+						  });
+
+						});
+						  </script>
+			<!-- 	</div>
+
+
+		 </div> -->
+		<script>
+			var menuLeft = document.getElementById( 'cbp-spmenu-s1' ),
+				showLeftPush = document.getElementById( 'showLeftPush' ),
+				showRightPush = document.getElementById( 'showRightPush' ),
+				body = document.body;
+
+			showLeftPush.onclick = function() {
+				classie.toggle( this, 'active' );
+				classie.toggle( body, 'cbp-spmenu-push-toright' );
+				classie.toggle( menuLeft, 'cbp-spmenu-open' );
+				disableOther( 'showLeftPush' );
+			};
+
+			function disableOther( button ) {
+				if( button !== 'showLeftPush' ) {
+					classie.toggle( showLeftPush, 'disabled' );
+				}
+				if( button !== 'showRightPush' ) {
+					classie.toggle( showRightPush, 'disabled' );
+				}
+			}
+
+			$(document).ready(function () {
+			    var language = localStorage.getItem("language");
+
+			    if (language == "ar") {
+			        $('.dynamictext').css({ "direction": "rtl", "float":"right" });
+			    }
+			    else {
+			        $('.dynamictext').css({ "direction": "ltr", "float": "left" });
+			    }
+
+			});
+		</script>
+		
+		<!-- <script type="text/javascript">
+			$(document).ready(function() {
+				
+				var defaults = {
+					containerID: 'toTop', // fading element id
+					containerHoverID: 'toTopHover', // fading element hover id
+					scrollSpeed: 1200,
+					easingType: 'linear' 
+				};
+				
+				
+				$().UItoTop({ easingType: 'easeOutQuart' });
+				
+			});
+		</script> -->
+		
+</html>
+

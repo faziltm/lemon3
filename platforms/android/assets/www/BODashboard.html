@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html data-ng-app="LemonApp">
+<meta charset="UTF-8">
+
+
+ <style>
+.homelogin{
+display:none;
+margin-top:25%;
+}
+.homelogintitle{
+text-align:center;
+color:green;
+}
+</style> 
+
+
+ <div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12 navclas">
+				<nav class="navbar navbarclass">
+				<div align="center" class="navbartext"><a href="#" translate="DASHBOARD">Dashboard</a></div>
+				</nav>
+				<span id="showLeftPush" style="top:0;right:0;position:fixed;"><img src="images/Menu.png" alt=""></span>
+		   </div>
+  </div>
+   <!--//Navbar top-->
+   
+ <body class="cbp-spmenu-push">
+    <div class="overlay" ng-click="overclk();"></div>  
+         <!----------------------menu side------------------------------>
+			<nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
+			
+			
+				<a style="border-bottom:1px solid;text-align:center;background-color:#27AF54;"><div style="padding-top:20px"><font size="5" color="white" translate="WELCOME">WELCOME</font></div>
+				<div class="userhide"><br><font size="4" color="white">{{username}} <br>{{number}}</font></div></a>
+				
+				<div class="outhide"><a style="border-bottom:1px solid;" ng-click="logout();"><font class="menu-list" translate="LOGOUT">Logout</font><span class="glyphicon glyphicon-log-out menu-let-color"></span></a></div>
+		  </nav>
+	     
+		<!------------------------//menu side------------------------>
+		
+	
+  <!--start-Profile-->
+     <div class="service-section" id="service" style="background-color:#ededed">
+	    
+		      
+	<div class="about-top top1">
+				 
+				 <button id="clicko" ng-click="clickoo();" style="display:none;"></button>
+		 </div>
+				
+				
+	 <div class="about-top top1 tab1" style="margin:0px;padding:0px;width:100%;">
+		 
+				<h3 class="tittle" style="text-align:center;" translate="BOD-TITLE">UPCOMING EVENTS</h3>
+				
+				   <div class="table-responsive" style="border:1px solid;">          
+			  <table id="example" class="table table-bordered table-striped" border="1" style="border:1px solid;width:95%;margin:2.5%" cellspacing="0">
+				
+				<thead>
+				  <tr class="success">
+				
+					<th translate="D-EVENT">Event</th>
+					<th  translate="D-DATE">Date</th>
+					<!-- <th translate="D-LOCATION">Location</th> -->
+					<th translate="D-M-STATUS">Status</th>
+				  </tr>
+				</thead>
+				<tbody>
+				  <tr data-ng-repeat="x in mob track by $index">
+					<td  ng-click="showdetails($index);"><a>{{x.EventType}}</a></td>
+					<td>{{x.EventDate}}</td>
+					<!-- <td>{{x.LocationName}}</td> -->
+					<td>{{x.StatusCode}}</td>
+				  </tr>
+				  
+				</tbody>
+			  </table>
+			  </div>
+				   
+				   
+				   
+	  
+		 		
+	</div>
+	
+<!-- =================dashboard details modal================ -->	
+	
+   <div id="dashmodal1" class="modal fade homelogin" role="dialog" >
+  <div class="modal-dialog">
+
+    
+    <div class="modal-content">
+	
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title homelogintitle" translate="D-M-TITLE">Event Details</h4>
+      </div>
+	  
+      <div class="modal-body" align="center">
+			 <div class="table-responsive">          
+			  <table id="example" class="table table-bordered table-striped" border="1">
+				
+				<tbody>
+					<tr><td><b translate="D-M-EVENTTYPE">Event Type</b> <br>{{bookdetail.EventType}}</td><td><b translate="D-M-NAME">Name</b> <br>{{bookdetail.Name}}</td></tr>
+					<tr><td><b translate="BOD-EVENTID">Event ID</b>  <br>{{bookdetail.EventID}}</td><td><b translate="BOD-BOOKID">ID</b> <br>{{bookdetail.ID}}</td></tr>
+					<tr><td><b translate="D-M-EVENTDATE">Event Date</b> <br>{{bookdetail.EventDate}}</td><td><b translate="D-M-MOBILE">Mobile Number</b><br> {{bookdetail.MobileNumber}}</td></tr>
+					<tr><td><b translate="D-M-LOCATION">Location</b> <br>{{bookdetail.LocationName}}</td><td><b translate="D-M-TOTALAMOUNT">Total Amount</b><br> {{bookdetail.TotalAmount}} OMR</td></tr>
+					<tr><td><b translate="D-M-TEAMLEAD">TeamLead</b> <br>{{bookdetail.TeamLeadName}}</td><td><b translate="D-M-DISCOUNT">Discount</b> <br>{{bookdetail.Discount}} OMR</td></tr>
+					<tr><td><b translate="D-M-STATUS">Status</b> <br>{{bookdetail.StatusCode}}</td><td><b translate="D-M-TOTALPAID">Total Paid</b><br> {{bookdetail.TotalPaid}} OMR</td></tr>
+				
+				</tbody>
+			  </table>
+			  </div>
+	  </div>
+	 
+	 
+      <div class="modal-footer">
+		<div align="center">
+		<button type="button" class="btn btn-default btn-success"  class="close" data-dismiss="modal" translate="D-CLOSE">close</button>
+		</div>
+      </div>
+	  
+    </div>
+
+	
+  </div>
+</div>
+	
+<!--//// =================dashboard details modal================ -->	
+	
+		<!-- <div class="about-top top1"> -->
+				 
+		 <!-- </div> -->
+				
+		<div class="about-top top1 tab2" style="margin-top:-15px;padding:0px;width:100%;">
+	     
+		 
+		 <h3 class="tittle" style="text-align:center;margin-bottom:20px;padding-top:20px;" translate="BOD-TITLE2">USER FEEDBACK</h3>
+				   
+			  <div class="table-responsive" style="border:1px solid;">          
+			  <table  class="table table-bordered table-striped example compact" border="1" style="border:1px solid;width:95%;margin:2.5%" cellspacing="0">
+				<thead>
+				  <tr class="success">
+				
+					<th translate="BOD-USER">User</th>
+					<th translate="D-EVENT">Event</th>
+					<!-- <th>Date</th> -->
+					<th translate="D-LOCATION">Location</th>
+					<th translate="D-RATING">Rating</th>
+				  </tr>
+				</thead>
+				<tbody>
+				
+				  <tr data-ng-repeat="y in mob1 track by $index">
+					
+					<td ng-click="feeddetails($index);"><a>{{y.FirstName}}</a></td>
+					<td>{{y.EventType}}</td>
+					<!-- <td>{{y.EventDate}}</td> -->
+					<td>{{y.LocationName}}</td>
+					<td ng-show="rating(y.Rating,$index);" ng-hide="rating(y.Rating,$index);" id="{{$index}}"></td>
+				  </tr>
+				  
+				 
+					
+				</tbody>
+			  </table>
+			  </div>
+				   
+				   
+				   
+		  </div>		
+	   
+		
+	 </div>
+  <!--//Profile-->
+
+  
+  <!-- =================feedback details modal================ -->	
+	
+   <div id="dashmodal2" class="modal fade homelogin" role="dialog" >
+  <div class="modal-dialog">
+
+    
+    <div class="modal-content">
+	
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title homelogintitle" translate="BOD-TITLE3">Feedback Details</h4>
+      </div>
+	  
+      <div class="modal-body" align="center">
+			 <div class="table-responsive">          
+			  <table id="example" class="table table-bordered table-striped" border="1">
+				
+				<tbody>
+					<tr><td><b translate="D-M-EVENTTYPE">Event Type</b> <br>{{feeddetail.EventType}}</td><td><b translate="D-M-NAME">Name</b>  <br> {{feeddetail.FirstName}}</td></tr>
+					<tr><td><b translate="D-M-EVENTDATE">Event Date</b> <br> {{dategive  | date: "MMM dd,yyyy"}}</td><td><b translate="BOD-EVENTID">Event ID</b> <br> {{feeddetail.EventID}}</td></tr>
+					<tr><td><b translate="D-M-LOCATION">Location Name</b> <br> {{feeddetail.LocationName}}</td><td><b translate="BOD-FEEDBACK">FeedBack</b> <br> {{feeddetail.FeedBack}}</td></tr>
+					<tr><td><b translate="D-M-TEAMLEAD">TeamLead</b>  <br> {{feeddetail.TeamLead}} <!-- <span ng-show="Trating(feeddetail.TeamLead);" ng-hide="Trating(feeddetail.TeamLead);" class="trating"></span> --></td><td><b>Rating</b> : <span ng-show="Rrating(feeddetail.Rating);" ng-hide="Rrating(feeddetail.Rating);" class="rrating"></span></td></tr>
+				</tbody>
+			  </table>
+			  </div>
+	  </div>
+	 
+	 
+      <div class="modal-footer">
+		<div align="center">
+		<button type="button" class="btn btn-default btn-success"  class="close" data-dismiss="modal" translate="D-CLOSE">close</button>
+		</div>
+      </div>
+	  
+    </div>
+
+	
+  </div>
+</div>
+	
+<!--//// =================feedback details modal================ -->
+  
+
+	<!----------------------------footer Nav---------------------------------------->
+			<div class="navfoot" align="center">
+		              <img src="images/Lemon_Tech_logo.png" style="width:120px;"/>
+		            </div>
+	<!--------------------------//footer Nav---------------------------------------->
+							
+		<!--start-smoth-scrolling-->
+	<!-- <a href="#about" id="toTop" class="scroll" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a> -->
+		<!--//smoth-scrolling-->
+							
+</body>
+
+						 <script>
+						 
+						// You can also use "$(window).load(function() {"
+						$(function () {
+						  // Slideshow 4
+						  $("#slider4").responsiveSlides({
+						auto: true,
+						pager: true,
+						nav:false,
+						speed: 500,
+						namespace: "callbacks",
+						before: function () {
+						  $('.events').append("<li>before event fired.</li>");
+						},
+						after: function () {
+						  $('.events').append("<li>after event fired.</li>");
+						}
+						  });
+
+						});
+						  </script>
+			<!-- 	</div>
+
+
+		 </div> -->
+		<script>
+			var menuLeft = document.getElementById( 'cbp-spmenu-s1' ),
+				showLeftPush = document.getElementById( 'showLeftPush' ),
+				showRightPush = document.getElementById( 'showRightPush' ),
+				body = document.body;
+
+			showLeftPush.onclick = function() {
+				classie.toggle( this, 'active' );
+				classie.toggle( body, 'cbp-spmenu-push-toright' );
+				classie.toggle( menuLeft, 'cbp-spmenu-open' );
+				disableOther( 'showLeftPush' );
+			};
+
+			function disableOther( button ) {
+				if( button !== 'showLeftPush' ) {
+					classie.toggle( showLeftPush, 'disabled' );
+				}
+				if( button !== 'showRightPush' ) {
+					classie.toggle( showRightPush, 'disabled' );
+				}
+			}
+		</script>
+		
+		<!-- <script type="text/javascript">
+			$(document).ready(function() {
+				
+				var defaults = {
+					containerID: 'toTop', // fading element id
+					containerHoverID: 'toTopHover', // fading element hover id
+					scrollSpeed: 1200,
+					easingType: 'linear' 
+				};
+				
+				
+				$().UItoTop({ easingType: 'easeOutQuart' });
+				
+			});
+		</script> -->
+		
+</html>
+

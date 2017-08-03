@@ -1,0 +1,195 @@
+﻿<!DOCTYPE html>
+<html data-ng-app="LemonApp">
+<meta charset="UTF-8">
+<style>
+    .white-bg-div {
+        margin: 20px;
+        background-color: #FFFFFF;
+        text-align: justify;
+        border: 1px solid rgba(10, 1, 1, 0.74);
+    }
+    .about-pic img {
+        margin-top: -42px;
+    }
+
+    .white-bg-div2 {
+        margin: 20px;
+        background-color: #FFFFFF;
+        font-weight: bold;
+        border: 1px solid rgba(10, 1, 1, 0.74);
+    }
+</style>
+  <div>
+				<nav class="navbar navbarclass">
+				<div style="float:left;"><a href="#Home"><img src="images/left-yellow.png" style="width:50px;margin:5px;position:absolute;"/></a></div>
+				<div align="center" class="navbartext"><a href="#" translate="PR">العلاقات العامة</a></div>
+				</nav>
+				<span id="showLeftPush" style="top:0;right:0;position:fixed;"><img src="images/Menu.png" alt=""></span>
+		   </div>
+   <!--//Navbar top-->
+   
+<body class="cbp-spmenu-push">
+    <div class="overlay" ng-click="overclk();"></div>
+    <!----------------------menu side------------------------------>
+    <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
+        <!-- <h3>Menu</h3> -->
+        <!-- <a href="#home">Home</a>
+        <a href="#about">Contact</a>
+        <a href="#service">Services</a>
+        <a href="#test">Testimonials</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#contact">Logout</a> -->
+        <!-- <div class="loghide"><a href="#myModal" ng-click="closmenu();">LOGIN</a></div> -->
+        <!-- <div class="userhide" style="background-color:black;padding:10px 0px 10px 0px;"><a><font size="4" color="white">Welcome: {{username}}</font></a></div>
+        <a href="#Home" ng-click="closmenu();">Home</a>
+        <div class="dashhide"><a href="#Dashboard" ng-click="closmenu();">Dashboard</a></div>
+        <a href="#Technology" ng-click="closmenu();">Technology</a>
+        <a href="#Hospitality" ng-click="closmenu();">Hospitality</a>
+        <div class="outhide"><a href="#" ng-click="logout();">Logout</a></div> -->
+
+        <a style="border-bottom:1px solid;text-align:center;background-color:#27AF54;">
+            <div style="padding-top:20px"><font size="5" color="white" translate="WELCOME">WELCOME</font></div>
+            <div class="user1hide"><br><font size="4" color="white" translate="GUEST">GUEST</font></div>
+            <div class="userhide"><br><font size="4" color="white">{{username}} <br>{{number}}</font></div>
+        </a>
+
+        <div><a style="border-bottom:1px solid;" href="#Home" ng-click="closmenu();"><font class="menu-list" translate="HOME">Home</font><span class="glyphicon glyphicon-home menu-let-color"></span></a></div>
+        <!-- <div class="loghide"><a style="border-bottom:1px solid;" href="#myModal" ng-click="loginbtnactiv();"><font class="menu-list" translate="LOGIN">Login</font><span class="glyphicon glyphicon-log-in menu-let-color"></span></a></div> -->
+        <div class="dashhide"><a style="border-bottom:1px solid;" href="#Dashboard" ng-click="closmenu();"><font class="menu-list" translate="DASHBOARD">Dashboard</font><span class="glyphicon glyphicon-th-list menu-let-color"></span></a></div>
+        <div class="profhide"><a style="border-bottom:1px solid;" href="#Profile" ng-click="closmenu();"><font class="menu-list" translate="PROFILE">Profile</font><span class="glyphicon glyphicon-user menu-let-color"></span></a></div>
+
+        <div><a style="border-bottom:1px solid;" href="#Gallery" ng-click="closmenu();"><font class="menu-list" translate="GALLERY">Gallery</font><span class="glyphicon glyphicon-th-large menu-let-color"></span></a></div>
+        <div><a style="border-bottom:1px solid;" href="#Technology" ng-click="closmenu();"><font class="menu-list" translate="TECHNOLOGY">Technology</font><span class="glyphicon glyphicon-phone menu-let-color"></span></a></div>
+        <!-- <div><a style="border-bottom:1px solid;" href="#PublicRelations" ng-click="closmenu();"><font class="menu-list" translate="PUBLICRELATION">Public Relations</font><span class="glyphicon glyphicon-hand-left menu-let-color"></span></a></div> -->
+        <div><a style="border-bottom:1px solid;" href="#Hospitality" ng-click="closmenu();"><font class="menu-list" translate="HOSPITALITY">Hospitality</font><span class="glyphicon glyphicon-cutlery menu-let-color"></span></a></div>
+
+        <div class="outhide"><a style="border-bottom:1px solid;" ng-click="logout();"><font class="menu-list" translate="LOGOUT">Logout</font><span class="glyphicon glyphicon-log-out menu-let-color"></span></a></div>
+    </nav>
+
+    <!------------------------//menu side------------------------>
+    <!--start-Profile-->
+    <div style="background-color: #ededed; padding-top: 70px;">
+        <div class="white-bg-div">
+            <div class="about-pic">
+                <img src="images/Pics/PR1.jpg" style="width:100%;" alt="" />
+            </div>
+
+            <div class="about-text white-bg-text dynamictext">
+                <p translate="PR1-1">تنتهج ليمون اسلوب متميز لتقديم خدماتها يجمع بين الحداثة والموروثات الوطنية وباستخدام التقنيات الحديثة للتنفيذ والاشراف من خلال كوادر عمانية مدربة ذات كفاءة ، وتسعى من خلالهم الى ترك بصمة مميزة وصدى طيب تجعلها منفردة فى مجال العلاقات العامة</p>
+            </div>
+        </div>
+    </div>
+    <!--//Profile-->
+
+    <!--start-Services-->
+    <div style="background-color:#ededed;">
+        <h3 class="tittle" style="margin-right:15px;" translate="PR2">الخدمات</h3>
+        <div class="white-bg-div2">
+            <div class="about-pic">
+                <img src="images/Pics/PR2.jpg" style="width:100%;" alt="" />   <!-- height:200px; -->
+            </div>
+            <div class="white-bg-text about-text dynamictext">
+                <p translate="PR2-1">طاقم عمل من الموظفين العمانيين المتمرسين في مجال الاستقبال والترحيب </p>
+
+                <p translate="PR2-2">تنظيم المؤتمرات المحلية والدولية </p>
+
+                <p translate="PR2-3">إبتكار استراتيجيات التنظيم وتقديم استشارات اقتصادية وفنية للتنظيم</p>
+
+                <p translate="PR2-4">التنسيق مع مختلف الجهات المعنية</p>
+
+                <p translate="PR2-5">تنظيم الحملات الاعلامية والاعلانية المرافقة للفعالياتإع</p>
+
+                <p translate="PR2-6">إعداد الأجهزة السمعية / البصرية / والإضاءة تصميم المطبوعات المرافقة والشعارات  إستقبال رجال الأعمال والشخصيات الإعتبارية</p>
+
+            </div>
+        </div>
+    </div>
+    <!--//services-->
+    <div style="padding-bottom: 80px; background-color: #ededed;">
+
+    </div>
+    <!----------------------------footer Nav---------------------------------------->
+    <div class="navfoot" align="center" style="position:fixed;bottom:0;width:100%;">
+        <img src="images/Lemon_Tech_logo.png" style="width:120px;" />
+    </div>
+    <!--------------------------//footer Nav---------------------------------------->
+    <!--start-smoth-scrolling-->
+    <a href="#about" id="toTop" class="scroll" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
+    <!--//smoth-scrolling-->
+
+</body>
+
+						 <script>
+						// You can also use "$(window).load(function() {"
+						$(function () {
+						  // Slideshow 4
+						  $("#slider4").responsiveSlides({
+						auto: true,
+						pager: true,
+						nav:false,
+						speed: 500,
+						namespace: "callbacks",
+						before: function () {
+						  $('.events').append("<li>before event fired.</li>");
+						},
+						after: function () {
+						  $('.events').append("<li>after event fired.</li>");
+						}
+						  });
+
+						});
+						  </script>
+			<!-- 	</div>
+
+
+		 </div> -->
+		<script>
+			var menuLeft = document.getElementById( 'cbp-spmenu-s1' ),
+				showLeftPush = document.getElementById( 'showLeftPush' ),
+				showRightPush = document.getElementById( 'showRightPush' ),
+				body = document.body;
+
+			showLeftPush.onclick = function() {
+				classie.toggle( this, 'active' );
+				classie.toggle( body, 'cbp-spmenu-push-toright' );
+				classie.toggle( menuLeft, 'cbp-spmenu-open' );
+				disableOther( 'showLeftPush' );
+			};
+
+			function disableOther( button ) {
+				if( button !== 'showLeftPush' ) {
+					classie.toggle( showLeftPush, 'disabled' );
+				}
+				if( button !== 'showRightPush' ) {
+					classie.toggle( showRightPush, 'disabled' );
+				}
+			}
+		</script>
+		
+		<script type="text/javascript">
+			$(document).ready(function() {
+				
+				var defaults = {
+					containerID: 'toTop', // fading element id
+					containerHoverID: 'toTopHover', // fading element hover id
+					scrollSpeed: 1200,
+					easingType: 'linear' 
+				};
+				
+				
+				$().UItoTop({ easingType: 'easeOutQuart' });
+				
+				var language = localStorage.getItem("language");
+				
+				if(language == "ar"){
+					$('.dynamictext').css({"direction": "rtl"});
+				}
+				else{
+					$('.dynamictext').css({"direction": "ltr"});
+				}
+				
+			});
+		</script>
+		
+</html>
+
