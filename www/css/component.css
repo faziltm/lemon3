@@ -10,8 +10,6 @@
   margin:auto 5%;
   position:fixed;
 }
-
-
 /********************** ////Custom Alertbox **************************/
 
 
@@ -27,16 +25,6 @@
   /*background: #eceae0;*/
   /*box-shadow:-2px 2px 8px rgba(0,0,0,0.4);*/
 }
-
-
-
-.trio 
-{
-padding-bottom:125px;
-
-}
-
-
 .loader{
 	z-index:1000;
   display:block;position:fixed;
@@ -1165,6 +1153,10 @@ width:40px;
 /* #wow{
   background-color:green; 	  
   }	 */
+  
+.homemainbutt3{
+padding-bottom:150px;
+}
    .homenav1{
 			background-color:#332F24;
 			min-height:70px;
@@ -1259,12 +1251,6 @@ width:40px;
 			}
 			.homemain-midelement{
 			margin-top:70px !important;width:90px;
-			}
-			.trio 
-			{
-			padding-bottom:160px;
-			padding-top:10px;
-
 			}
 
 
@@ -1376,13 +1362,10 @@ width:40px;
 			margin-left:-25px;width:130px !important;margin-top:0px !important;
 			}
 			.homemainbutt3{
-			margin-top:-25px;width:130px !important;
+			width:130px !important;
 			}
-			.trio 
-			{
-			padding-bottom:180px;
-			padding-top:10px;
-
+			.homemain-midelement{
+			margin-top:70px !important;width:90px;
 			}
 
 
